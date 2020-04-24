@@ -9,3 +9,9 @@ junheeL -- 2020-04-23 8:30
 
 yifanW -- 2020-04-23 8:30
       -discussed datasets we are going to use
+
+amandaZ -- 2020-04-24 3:30
+      -set up repo
+
+junheeL -- 2020-04-24 3:40
+      -created team flag
