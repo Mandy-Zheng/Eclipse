@@ -34,3 +34,6 @@ amandaZ -- 2020-04-24 22:10
 
 tiffanyC -- 2020-04-24 22:11
       -Finished Summary and Database Layout
+
+yifanW -- 2020-04-25 03:28
+      -Finished Component Map and Frontend Framework Explanation
