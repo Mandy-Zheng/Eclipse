@@ -40,3 +40,6 @@ yifanW -- 2020-04-25 03:28
 
 amandZ -- 2020-04-26 19:25
       -added API card
+
+yifanW -- 2020-04-26 19:56
+      -Finished Front End description
