@@ -10,8 +10,27 @@ junheeL -- 2020-04-23 8:30
 yifanW -- 2020-04-23 8:30
       -discussed datasets we are going to use
 
-amandaZ -- 2020-04-24 3:30
+amandaZ -- 2020-04-24 15:30
       -set up repo
 
-junheeL -- 2020-04-24 3:40
+junheeL -- 2020-04-24 15:40
       -created team flag
+
+amandaZ -- 2020-04-24 21:24
+      -set up template folders
+      -discussed how we are going to display data and organization
+
+tiffanyC -- 2020-04-23 21:24
+      -discussed how we are going to display data and organization
+
+junheeL -- 2020-04-23 21:24
+      -discussed how we are going to display data and organization
+
+yifanW -- 2020-04-23 21:24
+      -discussed how we are going to display data and organization
+
+amandaZ -- 2020-04-24 22:10
+      -Finished Site Map
+
+tiffanyC -- 2020-04-24 22:11
+      -Finished Summary and Database Layout
