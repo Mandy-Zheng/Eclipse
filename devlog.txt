@@ -38,8 +38,15 @@ tiffanyC -- 2020-04-24 22:11
 yifanW -- 2020-04-25 03:28
       -Finished Component Map and Frontend Framework Explanation
 
-amandZ -- 2020-04-26 19:25
+amandaZ -- 2020-04-26 19:25
       -added API card
 
 yifanW -- 2020-04-26 19:56
       -Finished Front End description
+
+amandaZ -- 2020-04-26 21:11
+      -added API section in Design Doc
+      -Updated README
+      -added and finished Individual Responsibilities on Design Doc
+      -Worked on Project Timeline
+      -added Design pdf
