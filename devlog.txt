@@ -50,3 +50,8 @@ amandaZ -- 2020-04-26 21:11
       -added and finished Individual Responsibilities on Design Doc
       -Worked on Project Timeline
       -added Design pdf
+
+tiffanyC -- 2020-04-26 21:13
+      -worked on Project Timeline
+      -laid out design for databases
+      -updated project summary
