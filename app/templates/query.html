@@ -1,13 +1,31 @@
 {% extends "_base.html" %}
 
 {% block body %}
-<center>
-  <h2>Please select the data you want to be displayed:</h2>
-  <h3>Select which countries' data you want to be shown:</h3>
-  <h3>Select which states' data you want to be shown:</h3>
 
+  <h2>Please Select the Data you want to be displayed:</h2>
+
+  <h3>Select which states' data you want to be shown:</h3>
+   <!-- Individual States -->
+   <div>
+     {% for state in states %}
+    <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+      <input type="checkbox" class="form-check-input filled-in" id={{state_dict[state]}} unchecked>
+      <label class="form-check-label">{{state}}</label>
+    </span>
+    {% endfor %}
+  </div>
+
+  <h3>Select which countries' data you want to be shown:</h3>
+  <div>
+    {% for country in countries %}
+   <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+     <input type="checkbox" class="form-check-input filled-in" id={{country}} unchecked>
+     <label class="form-check-label">{{country}}</label>
+   </div>
+   {% endfor %}
+  </div>
+  <br>
   <form action = "/data">
-    <button type = "submit" class = "btn btn-primary" value = "sumbit"> Render </button>
+   <button type = "submit" class = "btn btn-primary" value = "sumbit"> Render </button>
   </form>
-</center>
 {% endblock %}

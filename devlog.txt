@@ -64,7 +64,7 @@ amandaZ -- 2020-04-28 21:54
       -edited welcome page
       -created querying html
       -simple rendering template functions
-      
+
 tiffanyC -- 2020-04-28 22:00
       -edited summary to clarify details about pie and graph charts and popups
       -resolved Issues 1 and 4
@@ -75,3 +75,13 @@ junheeL -- 2020-04-29 07:23
 
 junheeL -- 2020-04-29 08:07
       -played around with spacing in app/__init__.py to make the code look nicer
+
+amandaZ -- 2020-04-29 18:20
+      -found datasets for project
+      -made query page have all the check boxes for each location option
+      -updated __init__.py to contain states initials and countries we are using
+
+tiffanyC -- 2020-04-29 18:32
+      -updated _base.html
+      -laid out html pages for landing site and the data selection page
+      
