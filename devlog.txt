@@ -64,3 +64,7 @@ amandaZ -- 2020-04-28 21:54
       -edited welcome page
       -created querying html
       -simple rendering template functions
+      
+tiffanyC -- 2020-04-28 22:00
+      -edited summary to clarify details about pie and graph charts and popups
+      -resolved Issues 1 and 4
