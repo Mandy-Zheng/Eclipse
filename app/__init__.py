@@ -15,8 +15,10 @@ def home():
 def query():
     return render_template("query.html", title="Covid-19 Tracker")
 @app.route('/data')
+
 def displayData():
     pass
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
