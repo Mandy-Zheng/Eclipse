@@ -84,4 +84,6 @@ amandaZ -- 2020-04-29 18:20
 tiffanyC -- 2020-04-29 18:32
       -updated _base.html
       -laid out html pages for landing site and the data selection page
-      
+
+yifanW -- 2020-04-29 18:34
+      -created html page for displaying data and added basic features
