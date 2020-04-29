@@ -14,8 +14,8 @@ def home():
 @app.route('/query')
 def query():
     return render_template("query.html", title="Covid-19 Tracker")
+    
 @app.route('/data')
-
 def displayData():
     pass
 
