@@ -11,18 +11,31 @@
         <script src='http://d3js.org/d3.v5.min.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>]
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        {% block style %}
-        {% endblock %}
     </head>
     <body>
         <h1>Please Select the Data you want to be displayed:</h1>
-        <h3>Select which countries' data you want to be shown:</h3>
-        <h3>Select which states' data you want to be shown:</h3>
 
-        <button><a href="/dara">Render</a></button>
-        {% block body %}
-        {% endblock %}
-        {% block scripts %}
-        {% endblock %}
+        <h3>Select which states' data you want to be shown:</h3>
+         <!-- Individual States -->
+         <div>
+           {% for state in states %}
+          <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+            <input type="checkbox" class="form-check-input filled-in" id={{state_dict[state]}} unchecked>
+            <label class="form-check-label">{{state}}</label>
+          </span>
+          {% endfor %}
+        </div>
+
+        <h3>Select which countries' data you want to be shown:</h3>
+        <div>
+          {% for country in countries %}
+         <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+           <input type="checkbox" class="form-check-input filled-in" id={{country}} unchecked>
+           <label class="form-check-label">{{country}}</label>
+         </div>
+         {% endfor %}
+       </div>
+
+        <button><a href="/data">Render</a></button>
     </body>
 </html>
