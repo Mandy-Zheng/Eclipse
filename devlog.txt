@@ -71,3 +71,4 @@ tiffanyC -- 2020-04-28 22:00
 
 junheeL -- 2020-04-29 07:23
       -edited "Journey of the Data" diagram for clarity
+      -edited backend description to offer more detail regarding AJAX
