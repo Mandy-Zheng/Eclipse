@@ -59,3 +59,8 @@ tiffanyC -- 2020-04-26 21:13
       -worked on Project Timeline
       -laid out design for databases
       -updated project summary
+
+amandaZ -- 2020-04-28 21:54
+      -edited welcome page
+      -created querying html
+      -simple rendering template functions
