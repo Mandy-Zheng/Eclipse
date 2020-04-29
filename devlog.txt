@@ -72,3 +72,6 @@ tiffanyC -- 2020-04-28 22:00
 junheeL -- 2020-04-29 07:23
       -edited "Journey of the Data" diagram for clarity
       -edited backend description to offer more detail regarding AJAX
+
+junheeL -- 2020-04-29 08:07
+      -played around with spacing in app/__init__.py to make the code look nicer
