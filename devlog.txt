@@ -87,3 +87,7 @@ tiffanyC -- 2020-04-29 18:32
 
 yifanW -- 2020-04-29 18:34
       -created html page for displaying data and added basic features
+
+junheeL -- 2020-04-29 20:43
+      -implemented data loading
+      -relocated csv files into the app/static/data directory
