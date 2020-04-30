@@ -3,12 +3,14 @@
 # P04 :: Let the Data Speak
 # 2020-04-??
 
-from flask import Flask , render_template,request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from functools import wraps
-import sqlite3, os, random
+import os, random, csv
 import urllib3, json, urllib
 
 app = Flask(__name__)
+countries = []
+states = []
 abbrev = {
     'Alabama': 'AL',
     'Alaska': 'AK',
@@ -70,6 +72,14 @@ abbrev = {
 
 countries=["Spain", "China", "Italy", "Iran", "Canada", "South Korea", "Turkey", "United Kingdom", "Egypt", "Zimbabwe", "United States"]
 
+def loadData(data, csvfile):
+    with open(csvfile, 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            date = row[0].split('-')
+            row[0] = ''.join(date)
+            data.append(row)
+
 @app.route('/')
 def home():
     return render_template("welcome.html", title="COVID-19 Tracker", heading="Welcome to COVID-19 Tracker!")
@@ -79,10 +89,23 @@ def query():
     states=abbrev.keys()
     return render_template("query.html", title="COVID-19 Tracker", heading = "Data Selection", states=states,countries=countries,state_dict=abbrev)
 
-@app.route('/data')
+@app.route('/data', methods=['POST'])
 def displayData():
     pass
 
+@app.route('/data', methods=['GET'])
+def jsonData():
+    try:
+        c = [row for row in countries if row[0] == request.args['date']]
+        s = [row for row in states if row[0] == request.args['date']]        
+    except KeyError:
+        return json.dumps()
+
+def filter(data, region):
+    
+
 if __name__ == '__main__':
     app.debug = True
+    loadData(countries, '/static/data/covid_countries.csv')
+    loadData(states, '/static/data/covid_states.csv')
     app.run()
