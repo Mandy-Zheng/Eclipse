@@ -1,31 +1,74 @@
 {% extends "_base.html" %}
 
 {% block body %}
+  <br>
+  <h3>Please select the data you want to be displayed.</h3>
+  <br>
 
-  <h2>Please Select the Data you want to be displayed:</h2>
+  <h5>Select state(s) for which you want data to be displayed:</h5>
 
-  <h3>Select which states' data you want to be shown:</h3>
-   <!-- Individual States -->
-   <div>
-     {% for state in states %}
-    <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
-      <input type="checkbox" class="form-check-input filled-in" id={{state_dict[state]}} unchecked>
-      <label class="form-check-label">{{state}}</label>
-    </span>
-    {% endfor %}
-  </div>
-
-  <h3>Select which countries' data you want to be shown:</h3>
+  <!-- Individual States -->
   <div>
-    {% for country in countries %}
-   <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
-     <input type="checkbox" class="form-check-input filled-in" id={{country}} unchecked>
-     <label class="form-check-label">{{country}}</label>
-   </div>
+    {% for state in states %}
+      <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
+        <input type="checkbox" class="form-check-input filled-in states" id={{state_dict[state]}}>
+        <label class="form-check-label">{{state}}</label>
+      </span>
+    {% endfor %}
+    <br><br>
+    <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+      <input type="checkbox" class="form-check-input filled-in" id="allStates">
+      <label class="form-check-label">All States</label>
+    </span>
+  </div>
+  <br><br>
+
+  <h5>Select country/countries for which you want data to be displayed:</h5>
+  <div>
+    {% for country in countriesList %}
+      <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
+        <input type="checkbox" class="form-check-input filled-in countries" id={{country}}>
+        <label class="form-check-label">{{country}}</label>
+      </div>
    {% endfor %}
+   <br><br>
+   <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+     <input type="checkbox" class="form-check-input filled-in" id="allCountries">
+     <label class="form-check-label">All Countries</label>
+   </span>
   </div>
   <br>
-  <form action = "/data">
-   <button type = "submit" class = "btn btn-primary" value = "sumbit"> Render </button>
-  </form>
+  <center>
+    <form action = "/data">
+      <button type = "submit" class = "btn btn-primary" value = "sumbit"> Render </button>
+    </form>
+  </center>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  var allStates = document.querySelector("#allStates");
+  allStates.addEventListener('change', function() {
+    if (this.checked) {
+      var elements = document.getElementsByClassName("form-check-input filled-in states");
+      var state = '';
+      for (var i=0; i<elements.length; i++) {
+        state = elements[i];
+        state.disabled = true;
+      }
+    }
+  );
+
+  var allCountries = document.querySelector("#allCountries");
+  allCountries.addEventListener('change', function() {
+    if (this.checked) {
+      var elements = document.getElementsByClassName("form-check-input filled-in countries");
+      var state = '';
+      for (var i=0; i<elements.length; i++) {
+        state = elements[i];
+        state.disabled = true;
+      }
+    }
+  );
+</script>
 {% endblock %}

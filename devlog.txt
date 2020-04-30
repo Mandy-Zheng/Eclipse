@@ -91,3 +91,9 @@ yifanW -- 2020-04-29 18:34
 junheeL -- 2020-04-29 20:43
       -implemented data loading
       -relocated csv files into the app/static/data directory
+
+yifanW -- 2020-04-30 02:59
+      -edited Component Map in design doc
+      -fixed data.html to inherit _base.html
+      -formatted welcome.html
+      -attempted to add disabling input feature to checkboxes but still needs work
