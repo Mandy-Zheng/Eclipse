@@ -25,7 +25,7 @@ Our Covid-19 Tracker aims to give a comprehensive overview of the day-to-day cha
 - `python3 -m venv covid19_venv`
 - `. covid19_venv/bin/activate` - note the space!
 - `cd Eclipse/`
-- `pip3 install -r doc/requirements.txt`
+- `pip3 install -r requirements.txt`
 - `cd app/`
 - `python3 app.py`
 
