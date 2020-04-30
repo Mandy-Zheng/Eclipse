@@ -11,7 +11,7 @@
   <div>
     {% for state in states %}
       <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
-        <input type="checkbox" class="form-check-input filled-in states" id={{state_dict[state]}}>
+        <input type="checkbox" class="form-check-input filled-in states" id={{state_dict[state]}} name='states'>
         <label class="form-check-label">{{state}}</label>
       </span>
     {% endfor %}
@@ -27,7 +27,7 @@
   <div>
     {% for country in countriesList %}
       <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
-        <input type="checkbox" class="form-check-input filled-in countries" id={{country}}>
+        <input type="checkbox" class="form-check-input filled-in countries" id={{country}} name='countries'>
         <label class="form-check-label">{{country}}</label>
       </div>
    {% endfor %}

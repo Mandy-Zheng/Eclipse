@@ -97,3 +97,7 @@ yifanW -- 2020-04-30 02:59
       -fixed data.html to inherit _base.html
       -formatted welcome.html
       -attempted to add disabling input feature to checkboxes but still needs work
+
+junheeL -- 2020-04-30 17:01
+      -implemented datetime for easier date management
+      -implemented data querying and retrieval

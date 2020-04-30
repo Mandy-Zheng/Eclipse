@@ -7,6 +7,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from functools import wraps
 import os, random, csv
 import urllib3, json, urllib
+import datetime
 
 app = Flask(__name__)
 countries = []
@@ -77,7 +78,8 @@ def loadData(data, csvfile):
         reader = csv.reader(f)
         for row in reader:
             date = row[0].split('-')
-            row[0] = ''.join(date)
+            datestring = ''.join(date)
+            row[0] = datetime.date.fromisoformat('-'.join(datestring[:4], datestring[4:6], datestring[6:]))
             data.append(row)
 
 @app.route('/')
@@ -95,11 +97,13 @@ def displayData():
 
 @app.route('/data', methods=['GET'])
 def jsonData():
+    day0 = datetime.date.fromisoformat('2020-01-21')
     try:
-        c = [row for row in countries if row[0] == request.args['date']]
-        s = [row for row in states if row[0] == request.args['date']]
+        c = [row for row in countries if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['countries']]
+        s = [row for row in states if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['states']]
+        return json.dumps({'countries': c, 'states': s})
     except KeyError:
-        return json.dumps()
+        return json.dumps({'countries': countries, 'states': states})
 
 #def filter(data, region):
 
