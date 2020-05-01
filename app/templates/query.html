@@ -2,12 +2,13 @@
 
 {% block body %}
 <div style = "margin-left: 15px; margin-right: 15px;">
+    <a href="/" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Home</a>
   <br>
   <h3 style = "color: #A882DD;">Please select the data you want to be displayed.</h3>
   <br>
 
   <h4 style = "color: #49416D;">Select state(s) and territories for which you want data to be displayed:</h4>
-<form action = "/data" method="get">
+<form action = "/data" method="post">
   <!-- Individual States -->
   <div>
 

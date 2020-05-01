@@ -92,22 +92,22 @@ def query():
     states=abbrev.keys()
     return render_template("query.html", title="COVID-19 Tracker", heading="Data Selection", states=states, countries=countries, state_dict=abbrev, countriesList=countriesList)
 
-@app.route('/data', methods=['GET'])
+@app.route('/data', methods=['POST'])
 def jsonData():
     dataRequestS=[]
     dataRequestC=[]
-    if request.args.get("allStates")=='on':
+    if request.form.get("allStates")=='on':
         dataRequestS=abbrev.keys()
     else:
         for checkbox in abbrev.keys():
-            value = request.args.get(checkbox)
+            value = request.form.get(checkbox)
             if value=='on':
                 dataRequestS.append(checkbox)
-    if request.args.get("allCountries")=='on':
+    if request.form.get("allCountries")=='on':
         dataRequestC=countriesList
     else:
         for checkbox in countriesList:
-            value = request.args.get(checkbox)
+            value = request.form.get(checkbox)
             if value=='on':
                 dataRequestC.append(checkbox)
     return render_template("data.html", states=dataRequestS, countries=dataRequestC)
