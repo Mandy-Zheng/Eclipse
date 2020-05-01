@@ -114,3 +114,6 @@ amandaZ -- 2020-04-30 23:35
       -worked on display data route
       -got data route to access which data user wants to display
       -minor route and html changes
+      
+junheeL -- 2020-05-01 11:53
+      -reorganized some routes

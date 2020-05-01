@@ -92,8 +92,8 @@ def query():
     states=abbrev.keys()
     return render_template("query.html", title="COVID-19 Tracker", states=states, countries=countries, state_dict=abbrev, countriesList=countriesList)
 
-@app.route('/data', methods=['POST'])
-def jsonData():
+@app.route('/data', methods=['GET'])
+def displayData():
     dataRequestS=[]
     dataRequestC=[]
     if request.form.get("allStates")=='on':
@@ -111,6 +111,9 @@ def jsonData():
             if value=='on':
                 dataRequestC.append(checkbox)
     return render_template("data.html", states=dataRequestS, countries=dataRequestC)
+
+@app.route('/data', methods=['POST'])
+def jsonData():
     #day0 = datetime.date.fromisoformat('2020-01-21')
     #try:
         #c = [row for row in countries if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['countries']]
