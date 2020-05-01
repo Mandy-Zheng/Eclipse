@@ -87,10 +87,19 @@ def loadData(data, csvfile):
 def home():
     return render_template("welcome.html", title="COVID-19 Tracker", heading="Welcome to COVID-19 Tracker!")
 
-@app.route('/query')
+@app.route('/query', methods=['GET'])
 def query():
     states=abbrev.keys()
     return render_template("query.html", title="COVID-19 Tracker", states=states, countries=countries, state_dict=abbrev, countriesList=countriesList)
+
+@app.route('/query', methods=['POST'])
+def encode():
+    #encode data recieved from the query form and redirect to a proper url for /data
+    pass
+
+def decode(argstr):
+    #decodes the encoded data to turn it into a list of countries and a list of states
+    pass
 
 @app.route('/data', methods=['GET'])
 def displayData():
@@ -114,13 +123,13 @@ def displayData():
 
 @app.route('/data', methods=['POST'])
 def jsonData():
-    #day0 = datetime.date.fromisoformat('2020-01-21')
-    #try:
-        #c = [row for row in countries if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['countries']]
-        #s = [row for row in states if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['states']]
-        #return json.dumps({'countries': c, 'states': s})
-    #except KeyError:
-        #return json.dumps({'countries': countries, 'states': states})
+    day0 = datetime.date.fromisoformat('2020-01-21')
+    try:
+        c = [row for row in countries if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['countries']]
+        s = [row for row in states if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['states']]
+        return json.dumps({'countries': c, 'states': s})
+    except KeyError:
+        return json.dumps({'countries': countries, 'states': states})
 
 #def filter(data, region):
 
