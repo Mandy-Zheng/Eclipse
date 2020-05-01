@@ -3,33 +3,33 @@
 {% block body %}
 <div style = "margin-left: 15px; margin-right: 15px;">
   <a href="/" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Home</a>
-    <br><br>
-      <center>
-        <div class="row">
-          <div class="col">
-            <h1>Data Display</h1>
-            {{text}}
-            <br>
-            <div class="slidecontainer">
-              Select the Date:
-              <input type="range" min="1" max="100" value="50" class="slider" id="dateSlider">
-            </div>
+    <br>
+    <center>
+      <div class="row">
+        <div class="col">
+          <h1>Data Display</h1>
+          {{text}}
+          <br>
+          <div class="slidecontainer">
+            Select the Date:
+            <input type="range" min="1" max="100" value="50" class="slider" id="dateSlider">
           </div>
         </div>
-        <button>Display All</button>
-        <br>
-        {% for state in states %}
-        <div class="row">
-              <h2>{{state}}</h2>
-              <button>Display</button>
-        </div>
-        {% endfor %}
-        {% for country in countries %}
-        <div class="row">
-              <h2>{{country}}</h2>
-              <button>Display</button>
-        </div>
-        {% endfor %}
-      </center>
       </div>
+      <button type="button" class="btn btn-outline-info">Display All</button>
+      <br>
+      {% for state in states %}
+      <div class="row">
+          <h2>{{state}}</h2> &nbsp;
+          <button type="button" class="btn btn-outline-info">Display</button>
+      </div>
+      {% endfor %}
+      {% for country in countries %}
+      <div class="row">
+          <h2>{{country}}</h2> &nbsp;
+          <button type="button" class="btn btn-outline-info">Display</button>
+      </div>
+      {% endfor %}
+    </center>
+</div>
 {% endblock %}

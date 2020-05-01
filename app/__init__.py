@@ -90,7 +90,7 @@ def home():
 @app.route('/query')
 def query():
     states=abbrev.keys()
-    return render_template("query.html", title="COVID-19 Tracker", heading="Data Selection", states=states, countries=countries, state_dict=abbrev, countriesList=countriesList)
+    return render_template("query.html", title="COVID-19 Tracker", states=states, countries=countries, state_dict=abbrev, countriesList=countriesList)
 
 @app.route('/data', methods=['POST'])
 def jsonData():
