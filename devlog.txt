@@ -101,3 +101,6 @@ yifanW -- 2020-04-30 02:59
 junheeL -- 2020-04-30 17:01
       -implemented datetime for easier date management
       -implemented data querying and retrieval
+
+junheeL -- 2020-04-30 20:41
+      -fixed bug where the first line of each csv file would be loaded as data and cause errors
