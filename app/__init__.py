@@ -76,10 +76,11 @@ countriesList=["Spain", "China", "Italy", "Iran", "Canada", "South Korea", "Turk
 def loadData(data, csvfile):
     with open(csvfile, 'r') as f:
         reader = csv.reader(f)
+        next(reader, None)
         for row in reader:
             date = row[0].split('-')
             datestring = ''.join(date)
-            row[0] = datetime.date.fromisoformat('-'.join(datestring[:4], datestring[4:6], datestring[6:]))
+            row[0] = datetime.date.fromisoformat('-'.join((datestring[:4], datestring[4:6], datestring[6:])))
             data.append(row)
 
 @app.route('/')
