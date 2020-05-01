@@ -110,7 +110,7 @@ tiffanyC -- 2020-04-30 22:06
       -created grid layout for checkboxes
       -add styling (fixed margins, changed colors) to query.html page
 
-amandaZ -- 2020-04-29 23:35
+amandaZ -- 2020-04-30 23:35
       -worked on display data route
       -got data route to access which data user wants to display
       -minor route and html changes
