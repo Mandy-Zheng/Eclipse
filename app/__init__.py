@@ -92,19 +92,32 @@ def query():
     states=abbrev.keys()
     return render_template("query.html", title="COVID-19 Tracker", heading="Data Selection", states=states, countries=countries, state_dict=abbrev, countriesList=countriesList)
 
-@app.route('/data', methods=['POST'])
-def displayData():
-    pass
-
 @app.route('/data', methods=['GET'])
 def jsonData():
-    day0 = datetime.date.fromisoformat('2020-01-21')
-    try:
-        c = [row for row in countries if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['countries']]
-        s = [row for row in states if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['states']]
-        return json.dumps({'countries': c, 'states': s})
-    except KeyError:
-        return json.dumps({'countries': countries, 'states': states})
+    dataRequestS=[]
+    dataRequestC=[]
+    if request.args.get("allStates")=='on':
+        dataRequestS=abbrev.keys()
+    else:
+        for checkbox in abbrev.keys():
+            value = request.args.get(checkbox)
+            if value=='on':
+                dataRequestS.append(checkbox)
+    if request.args.get("allCountries")=='on':
+        dataRequestC=countriesList
+    else:
+        for checkbox in countriesList:
+            value = request.args.get(checkbox)
+            if value=='on':
+                dataRequestC.append(checkbox)
+    return render_template("data.html", states=dataRequestS, countries=dataRequestC)
+    #day0 = datetime.date.fromisoformat('2020-01-21')
+    #try:
+        #c = [row for row in countries if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['countries']]
+        #s = [row for row in states if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['states']]
+        #return json.dumps({'countries': c, 'states': s})
+    #except KeyError:
+        #return json.dumps({'countries': countries, 'states': states})
 
 #def filter(data, region):
 
