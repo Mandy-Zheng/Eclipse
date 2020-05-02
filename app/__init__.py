@@ -95,14 +95,6 @@ def query():
 @app.route('/query', methods=['POST'])
 def encode():
     #encode data recieved from the query form and redirect to a proper url for /data
-    pass
-
-def decode(argstr):
-    #decodes the encoded data to turn it into a list of countries and a list of states
-    pass
-
-@app.route('/data', methods=['GET'])
-def displayData():
     dataRequestS=[]
     dataRequestC=[]
     if request.form.get("allStates")=='on':
@@ -119,6 +111,15 @@ def displayData():
             value = request.form.get(checkbox)
             if value=='on':
                 dataRequestC.append(checkbox)
+    pass
+
+def decode(argstr):
+    #decodes the encoded data to turn it into a list of countries and a list of states
+    pass
+
+@app.route('/data', methods=['GET'])
+def displayData():
+    dataRequestC, dataRequestS = decode(request.args['q'])
     return render_template("data.html", states=dataRequestS, countries=dataRequestC)
 
 @app.route('/data', methods=['POST'])
