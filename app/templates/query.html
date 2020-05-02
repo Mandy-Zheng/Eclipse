@@ -103,7 +103,6 @@
   var allCountries = document.querySelector("#allCountries");
   allCountries.addEventListener('change', function() {
     if (this.checked) {
-      console.log("yes");
       var elements = document.getElementsByClassName("form-check-input filled-in countries");
       var state = '';
       for (var i=0; i<elements.length; i++) {
@@ -113,7 +112,6 @@
     }
 
     if (!this.checked) {
-      console.log("yes");
       var elements = document.getElementsByClassName("form-check-input filled-in countries");
       var state = '';
       for (var i=0; i<elements.length; i++) {
