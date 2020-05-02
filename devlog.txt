@@ -114,6 +114,31 @@ amandaZ -- 2020-04-30 23:35
       -worked on display data route
       -got data route to access which data user wants to display
       -minor route and html changes
-      
+======================================================================================================
+Design Document Revision
+Reviewers of our Doc:
+    -Raduckal
+
+Concerns:
+  -Vagueness about why we chose our forms of data visualization
+      -We wanted to display the pi graphs with the percentages of recovery, deaths, and new cases out of total cases
+      -We also wanted to use the bar graphs to display the individual data pieces
+  -Clarification on how we would use AJAX
+      -We are using ajax to get the data from python routes to javascript
+  -Elaboration on Journey of Data Diagram
+      -updated the diagram with more specifications on how the data makes it's way from front end to backend
+  -Clarify the pop up feature
+      -As you move over the graphs, additional information like the exact amount of cases
+  -Question about neccessity of using flag api
+      -We are just using the flag as nice visuals and as a symbol next to the graph
+Timeline Adjustment:
+    -We decided to increase the amount of countries that we decided to display
+    -Moreover we decided that we would have the additional feature of pop ups for each states
+    -We also added more things into the extra features we hope to implement
+======================================================================================================
+
 junheeL -- 2020-05-01 11:53
       -reorganized some routes
+
+amandaZ -- 2020-05-01 22:56
+      -updated devlog to have the special document revision entry
