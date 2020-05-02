@@ -147,3 +147,6 @@ amandaZ -- 2020-05-01 22:56
 junheeL -- 2020-05-02 10:00
       -moved large constant variables to a new file
       -implemented country and state encoding and decoding
+
+junheeL -- 2020-05-02 18:09
+      -fixed syntax of path '/data'

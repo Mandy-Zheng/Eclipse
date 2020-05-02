@@ -164,10 +164,11 @@ def displayData():
 
 @app.route('/data', methods=['POST'])
 def jsonData():
+    c, s = decode(request.form['q']
     day0 = datetime.date.fromisoformat('2020-01-21')
     try:
-        c = [row for row in countries if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['countries']]
-        s = [row for row in states if abs(row[0] - day0) == request.args['date'] and row[1] in request.args['states']]
+        c = [row for row in countries if abs(row[0] - day0) == request.form['date'] and row[1] in c]
+        s = [row for row in states if abs(row[0] - day0) == request.form['date'] and row[1] in s
         return json.dumps({'countries': c, 'states': s})
     except KeyError:
         return json.dumps({'countries': countries, 'states': states})
