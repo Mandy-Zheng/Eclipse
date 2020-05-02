@@ -143,3 +143,7 @@ junheeL -- 2020-05-01 11:53
 
 amandaZ -- 2020-05-01 22:56
       -updated devlog to have the special document revision entry
+
+junheeL -- 2020-05-02 10:00
+      -moved large constant variables to a new file
+      -implemented country and state encoding and decoding

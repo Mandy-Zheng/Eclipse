@@ -58,3 +58,5 @@ abbrev = {
     'Wisconsin': 'WI',
     'Wyoming': 'WY'
 }
+
+encodestr = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'
