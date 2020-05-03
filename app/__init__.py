@@ -147,13 +147,13 @@ def decode(argstr):
         if intC % 2:
             c.append(country)
         intC = intC // 2
-        if ! intC:
+        if not intC:
             break
     for state in abbrev.keys():
         if intS % 2:
             s.append(state)
         intS = intS // 2
-        if ! intS:
+        if not intS:
             break
     return [c, s]
 
@@ -164,11 +164,11 @@ def displayData():
 
 @app.route('/data', methods=['POST'])
 def jsonData():
-    c, s = decode(request.form['q']
+    c, s = decode(request.form['q'])
     day0 = datetime.date.fromisoformat('2020-01-21')
     try:
         c = [row for row in countries if abs(row[0] - day0) == request.form['date'] and row[1] in c]
-        s = [row for row in states if abs(row[0] - day0) == request.form['date'] and row[1] in s
+        s = [row for row in states if abs(row[0] - day0) == request.form['date'] and row[1] in s]
         return json.dumps({'countries': c, 'states': s})
     except KeyError:
         return json.dumps({'countries': countries, 'states': states})

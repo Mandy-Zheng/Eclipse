@@ -53,27 +53,49 @@
   <br><br>
 
   <h4 style = "color: #49416D;">Select country/countries for which you want data to be displayed:</h4>
+
+  <!-- Individual Countries -->
   <div>
-    <div class = "row">
+
     {% for country in countriesList %}
-      <div class = "col">
+      {% if country == 'Afghanistan' %}
+      <div class="row">
+      {% endif %}
+      {% if country == 'Country/Region' %}
+      </div>
+      <div class ="row">
+      {% endif %}
+      <div class = "col" style = "width: 242px;">
         <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
           <input type="checkbox" class="form-check-input filled-in countries" id='{{country}}' name='{{country}}'>
           <label class="form-check-label">{{country}}</label>
         </div>
       </div>
-   {% endfor %}
-   </div>
-   <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
-     <input type="checkbox" class="form-check-input filled-in" id="allCountries" name="allCountries">
-     <label class="form-check-label">All Countries</label>
-   </span>
+      {% if country == 'Antigua and Barbuda' or country == 'Bahamas' or country == 'Belize' or country == 'Brazil' or
+      country == 'Cabo Verde' or country == 'Chile' or country == 'Cote d Ivoire' or country == 'Denmark' or
+      country == 'Egypt' or country == 'Ethiopia' or country == 'Georgia' or country == 'Guinea' or country == 'Hungary' or
+      country == 'Ireland' or country == 'Kazakhstan' or country == 'Laos' or country == 'Lithuania' or country == 'Maldives'
+      or country == 'Moldova' or country == 'Namibia' or country == 'Nigeria' or country == 'Papua New Guinea' or
+      country == 'Qatar' or country == 'Saint Vincent and the Grenadines' or country == 'Seychelles' or country == 'South Africa'
+      or country == 'Sweden' or country == 'Timor-Leste' or country == 'Uganda' or country == 'Venezuela' %}
+        </div>
+        <div class ="row">
+      {% endif %}
+      {% if country == 'Zimbabwe' %}
+        </div>
+      {% endif %}
+    {% endfor %}
+    <br>
+    <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+      <input type="checkbox" class="form-check-input filled-in" id="allCountries" name="allCountries">
+      <label class="form-check-label">All Countries</label>
+    </span>
   </div>
   <br>
   <center>
       <button type = "submit" class = "btn btn-primary" value = "sumbit"> Render </button>
   </center>
-      </form>
+</form>
 </div>
 {% endblock %}
 
@@ -120,7 +142,5 @@
       }
     }
   });
-
-
 </script>
 {% endblock %}
