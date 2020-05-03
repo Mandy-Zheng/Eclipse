@@ -112,7 +112,7 @@ def encode():
             value = request.form.get(checkbox)
             if value=='on':
                 dataRequestC.append(checkbox)
-    statesList = abbrev.keys()
+    statesList = list(abbrev.keys())
     stateStr = ''
     stateArg = 0
     for state in dataRequestS:
@@ -140,7 +140,7 @@ def decode(argstr):
     intS = 0
     for char in rawS:
         intS *= 64
-        intS += encodestr.indeX(char)
+        intS += encodestr.index(char)
     c = []
     s = []
     for country in countriesList:

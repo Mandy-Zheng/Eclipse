@@ -152,5 +152,8 @@ junheeL -- 2020-05-02 18:09
       -fixed syntax of path '/data'
 
 yifanW -- 2020-05-02 11:09
-      -debugged __init.py__
-      -created grid style for countries
+      -fixed minor syntax of '/query'
+      -created grid style for countries on query page
+
+yifanW -- 2020-05-03 13:46
+      -fixed minor error with '/data'
