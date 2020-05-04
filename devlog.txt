@@ -163,3 +163,6 @@ junheeL -- 2020-05-04 08:07
 
 junheeL -- 2020-05-04 08:54
       -turns out the error wasn't fixed, changed ordering of addition of strings to eliminate bug with encoding
+
+yifanW -- 2020-05-04 11:20
+      -fixed gridding for countries based on new list

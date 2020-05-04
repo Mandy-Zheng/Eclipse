@@ -35,7 +35,7 @@ def query():
 
 @app.route('/query', methods=['POST'])
 def encode():
-    encode data recieved from the query form and redirect to a proper url for /data
+    #encode data recieved from the query form and redirect to a proper url for /data
     dataRequestS=[]
     dataRequestC=[]
     if request.form.get("allStates")=='on':
