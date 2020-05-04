@@ -95,7 +95,7 @@ def query():
 
 @app.route('/query', methods=['POST'])
 def encode():
-    #encode data recieved from the query form and redirect to a proper url for /data
+    encode data recieved from the query form and redirect to a proper url for /data
     dataRequestS=[]
     dataRequestC=[]
     if request.form.get("allStates")=='on':
@@ -116,17 +116,17 @@ def encode():
     statesList.sort()
     stateStr = ''
     stateArg = 0
-    for state in dataRequestS:
+    for state in states:
         stateArg += 2 ** statesList.index(state)
     while stateArg > 0:
-        stateStr = stateStr + encodestr[stateArg % 64]
+        stateStr = encodestr[stateArg % 64] + stateStr
         stateArg = stateArg // 64
     countryStr = ''
     countryArg = 0
-    for country in dataRequestC:
+    for country in countries:
         countryArg += 2 ** countriesList.index(country)
     while countryArg > 0:
-        countryStr = countryStr + encodestr[countryArg % 64]
+        countryStr = encodestr[countryArg % 64] + countryStr
         countryArg = countryArg // 64
     return redirect('/data?q=%s~%s' % (countryStr, stateStr))
 
