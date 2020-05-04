@@ -116,14 +116,14 @@ def encode():
     statesList.sort()
     stateStr = ''
     stateArg = 0
-    for state in states:
+    for state in dataRequestS:
         stateArg += 2 ** statesList.index(state)
     while stateArg > 0:
         stateStr = encodestr[stateArg % 64] + stateStr
         stateArg = stateArg // 64
     countryStr = ''
     countryArg = 0
-    for country in countries:
+    for country in dataRequestC:
         countryArg += 2 ** countriesList.index(country)
     while countryArg > 0:
         countryStr = encodestr[countryArg % 64] + countryStr
