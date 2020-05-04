@@ -113,6 +113,7 @@ def encode():
             if value=='on':
                 dataRequestC.append(checkbox)
     statesList = list(abbrev.keys())
+    statesList.sort()
     stateStr = ''
     stateArg = 0
     for state in dataRequestS:
@@ -131,7 +132,8 @@ def encode():
 
 def decode(argstr):
     #decodes the encoded data to turn it into a list of countries and a list of states
-    statesList = abbrev.keys()
+    statesList = list(abbrev.keys())
+    statesList.sort()
     rawC, rawS = argstr.split('~')
     intC = 0
     for char in rawC:
