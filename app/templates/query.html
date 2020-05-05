@@ -1,5 +1,41 @@
 {% extends "_base.html" %}
 
+{% block style %}
+<!-- <style>
+input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    background:white;
+    border-radius:5px;
+    border:1px solid #555;
+}
+input[type="checkbox"]:not(:checked) + label.tick:before,
+input[type="checkbox"]:checked + label.tick:before {
+  content: '';
+  position: absolute;
+  top: .20em; left: .15em;
+
+  left: 0; top: 0;
+  width: 1.25em; height: 1.25em;
+}
+input[type="checkbox"]:not(:checked) + label.tick:after,
+input[type="checkbox"]:checked + label.tick:after {
+  content: '\2713\0020';
+  position: absolute;
+  top: .20em; left: .15em;
+  color: #09ad7e;
+}
+input[type="checkbox"]:not(:checked) + label.tick:after {
+  opacity: 0;
+  transform: scale(0);
+}
+input[type="checkbox"]:checked + label.tick:after {
+  opacity: 1;
+  transform: scale(1);
+}
+</style> -->
+{% endblock %}
+
 {% block body %}
 <div style = "margin-left: 15px; margin-right: 15px;">
   <a href="/" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Home</a>
@@ -21,7 +57,8 @@
       {% endif %}
       <div class="col" style = "width: 242px;">
         <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
-          <input type="checkbox" class="form-check-input filled-in states" id={{state_dict[state]}} name='{{state}}'>
+          <input type="checkbox" class="form-check-input filled-in states" id={{state_dict[state]}} name='{{state}}' style = "height: 15px; width: 18px;">
+          <label class="tick"></label>
           <label class="form-check-label">{{state}}</label>
         </span>
       </div>
@@ -46,7 +83,8 @@
     {% endfor %}
     <br>
     <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
-      <input type="checkbox" class="form-check-input filled-in" id="allStates" name="allStates">
+      <input type="checkbox" class="form-check-input filled-in" id="allStates" name="allStates"  style = "height: 15px; width: 18px;">
+      <label class="tick"></label>
       <label class="form-check-label">All States and Territories</label>
     </span>
   </div>
@@ -67,7 +105,8 @@
       {% endif %}
       <div class = "col" style = "width: 242px;">
         <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
-          <input type="checkbox" class="form-check-input filled-in countries" id='{{country}}' name='{{country}}'>
+          <input type="checkbox" class="form-check-input filled-in countries" id='{{country}}' name='{{country}}'  style = "height: 15px; width: 18px;">
+          <label class="tick"></label>
           <label class="form-check-label">{{country}}</label>
         </div>
       </div>
@@ -89,7 +128,8 @@
     {% endfor %}
     <br>
     <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
-      <input type="checkbox" class="form-check-input filled-in" id="allCountries" name="allCountries">
+      <input type="checkbox" class="form-check-input filled-in" id="allCountries" name="allCountries"  style = "height: 15px; width: 18px;">
+      <label class="tick"></label>
       <label class="form-check-label">All Countries</label>
     </span>
   </div>

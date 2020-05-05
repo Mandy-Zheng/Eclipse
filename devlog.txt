@@ -186,3 +186,6 @@ tiffanyC -- 2020-05-05 09:12
 junheeL -- 2020-05-05 09:48
       -fixed javascript data retrieval functions
       -fixed python backend to return proper data
+
+tiffanyC -- 2020-05-04 09:53
+      -played around with checkbox styling in query.html
