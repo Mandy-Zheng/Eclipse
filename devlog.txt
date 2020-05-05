@@ -176,3 +176,6 @@ tiffanyC -- 2020-05-04 22:28
       -worked with Amanda on dummy vertical bar charts
       -stylized data template and bar chart
       -updated date and added space in query.html
+
+junheeL -- 2020-05-05 07:47
+      -updated the getData() js fxn to properly return retrieved data

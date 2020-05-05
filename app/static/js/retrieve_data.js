@@ -13,12 +13,14 @@ const getQuery = function() {
 const getData = function(daysElapsed) {
     //daysElapsed should be from 2020-01-21
     var query = getQuery();
+    var data;
     $.ajax({
         method: 'POST',
         url: '/data',
         data: {'q': query, 'date': daysElapsed},
-        success: function(data) {
-            return data;
+        success: function(retrieved) {
+            data = retrieved;
         }
     });
+    return data;
 };
