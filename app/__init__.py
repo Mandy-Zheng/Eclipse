@@ -26,8 +26,8 @@ def loadData(data, csvfile):
 
 @app.route('/')
 def home():
-    return render_template("welcome.html", title="COVID-19 Tracker", heading="Welcome to COVID-19 Tracker!")
-
+    return render_template("welcome.html", title="COVID-19 Tracker", heading="Welcome to COVID-19 Tracker!", date = "May 4, 2020")
+    
 @app.route('/query', methods=['GET'])
 def query():
     statesList=abbrev.keys()

@@ -174,5 +174,5 @@ amandaZ -- 2020-05-04 22:03
 
 tiffanyC -- 2020-05-04 22:28
       -worked with Amanda on dummy vertical bar charts
-      -stylized data template
-      -add style and colors to bar chart
+      -stylized data template and bar chart
+      -updated date and added space in query.html
