@@ -182,3 +182,6 @@ junheeL -- 2020-05-05 07:47
 
 tiffanyC -- 2020-05-04 09:12
       -fixed fonts of axes and labels in bar chart
+
+tiffanyC -- 2020-05-04 09:53
+      -played around with checkbox styling in query.html
