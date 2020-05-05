@@ -5,10 +5,10 @@
 
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from functools import wraps
+from datetime import date, timedelta
 from utl.constants import *
 import os, random, csv
 import urllib3, json, urllib
-import datetime
 
 app = Flask(__name__)
 countries = []
@@ -21,7 +21,7 @@ def loadData(data, csvfile):
         for row in reader:
             date = row[0].split('-')
             datestring = ''.join(date)
-            row[0] = datetime.date.fromisoformat('-'.join((datestring[:4], datestring[4:6], datestring[6:])))
+            row[0] = date.fromisoformat('-'.join((datestring[:4], datestring[4:6], datestring[6:])))
             data.append(row)
 
 @app.route('/')
@@ -103,18 +103,25 @@ def decode(argstr):
 def displayData():
     dataRequestC, dataRequestS = decode(request.args['q'])
     return render_template("data.html", states=dataRequestS, countries=dataRequestC)
-'''
+
 @app.route('/data', methods=['POST'])
 def jsonData():
     c, s = decode(request.form['q'])
-    day0 = datetime.date.fromisoformat('2020-01-21')
+    day0 = date.fromisoformat('2020-01-21')
     try:
-        c = [row for row in countries if abs(row[0] - day0) == request.form['date'] and row[1] in c]
-        s = [row for row in states if abs(row[0] - day0) == request.form['date'] and row[1] in s]
-        return json.dumps({'countries': c, 'states': s})
+        c = [format(row) for row in countries if row[0] == day0 + timedelta(days=int(request.form['date'])) and row[1] in c]
+        s = [format(row) for row in states if row[0] == day0 + timedelta(days=int(request.form['date'])) and row[1] in s]
+        return json.dumps(c + s)
     except KeyError:
-        return json.dumps({'countries': countries, 'states': states})
-'''
+        c = [format(row) for row in countries if row[1] in c]
+        s = [format(row) for row in states if row[1] in s]
+        return json.dumps(c + s)
+
+def format(data, state=False):
+    if state:
+        return {'location': data[1], 'cases': data[2], 'recovered': data[11], 'deaths': data[14]}
+    return {'location': data[1], 'cases': data[5], 'recovered': data[6], 'deaths': data[7]}
+
 if __name__ == "__main__":
     app.debug = True
     loadData(countries, 'static/data/covid_countries.csv')
