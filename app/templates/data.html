@@ -3,7 +3,7 @@
 {% block style %}
 <style>
   .chart div {
-  /* font: 10px sans-serif; */
+  font: Didot;
   background-color: steelblue;
   text-align: right;
   padding: 3px;
@@ -13,8 +13,13 @@
     fill: none;
     stroke: #fff;
   }
-  .axis text {
+  .yaxis {
     font-size: 13px;
+    font-family: times;
+  }
+  .xaxis {
+    font-size: 14px;
+    font-family: times;
   }
   .bar {
       fill: #E5C3D1;
@@ -23,10 +28,11 @@
       fill: #F56C4E;
     }
   svg text.label {
-    fill:black;
-    font: 15px;
+    fill: black;
+    font-size: 14px;
     font-weight: 400;
     text-anchor: middle;
+    font-family: times;
   }
 </style>
 {% endblock %}

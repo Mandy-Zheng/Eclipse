@@ -63,10 +63,11 @@ svgContainer.selectAll(".text")
 svgContainer.append("g")
       .attr("class", "xaxis")
       .call(xAxis)
-      .selectAll("text");
-
+      .selectAll("text")
+      // .attr("font-family", "Didot")
 
 svgContainer.append("g")
       .attr("class", "yaxis")
       .call(yAxis)
-      .selectAll("text");
+      .selectAll("text")
+      // .attr("font-family", "Didot")
