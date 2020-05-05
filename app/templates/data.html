@@ -16,25 +16,23 @@
           </div>
         </div>
       </div>
-      <button type="button" class="btn btn-outline-info">Display All</button>
       <br>
       {% for state in states %}
       <div class="row">
           <h2>{{state}}</h2> &nbsp;
-          <button type="button" class="btn btn-outline-info">Display</button>
       </div>
       {% endfor %}
       {% for country in countries %}
       <div class="row">
           <h2>{{country}}</h2> &nbsp;
-          <button type="button" class="btn btn-outline-info">Display</button>
       </div>
       {% endfor %}
     </center>
-    <script type="text/javascript">  
+      <div id="chartID"></div>
+    <script type="text/javascript">
     </script>
     <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
-    <script src="{{ url_for('static/js', filename='index.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/index.js')}}"></script>
 </div>
 {% endblock %}
 

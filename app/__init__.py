@@ -99,12 +99,11 @@ def decode(argstr):
             break
     return [c, s]
 
-@app.route('/data', methods=['POST'])
+@app.route('/data', methods=['GET'])
 def displayData():
     dataRequestC, dataRequestS = decode(request.args['q'])
-    data=jsonData()
-    return render_template("data.html", states=dataRequestS, countries=dataRequestC,data=data)
-
+    return render_template("data.html", states=dataRequestS, countries=dataRequestC)
+'''
 @app.route('/data', methods=['POST'])
 def jsonData():
     c, s = decode(request.form['q'])
@@ -115,7 +114,7 @@ def jsonData():
         return json.dumps({'countries': c, 'states': s})
     except KeyError:
         return json.dumps({'countries': countries, 'states': states})
-
+'''
 if __name__ == "__main__":
     app.debug = True
     loadData(countries, 'static/data/covid_countries.csv')

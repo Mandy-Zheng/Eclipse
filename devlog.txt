@@ -166,3 +166,8 @@ junheeL -- 2020-05-04 08:54
 
 yifanW -- 2020-05-04 11:20
       -fixed gridding for countries based on new list
+
+amandaZ -- 2020-05-04 22:03
+      -made dummy vertical bar charts based off of data
+      -edited data template
+      -redid labeling of vertical charts
