@@ -99,10 +99,11 @@ def decode(argstr):
             break
     return [c, s]
 
-@app.route('/data', methods=['GET'])
+@app.route('/data', methods=['POST'])
 def displayData():
     dataRequestC, dataRequestS = decode(request.args['q'])
-    return render_template("data.html", states=dataRequestS, countries=dataRequestC)
+    data=jsonData()
+    return render_template("data.html", states=dataRequestS, countries=dataRequestC,data=data)
 
 @app.route('/data', methods=['POST'])
 def jsonData():
