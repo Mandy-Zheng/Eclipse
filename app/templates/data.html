@@ -1,5 +1,36 @@
 {% extends "_base.html" %}
 
+{% block style %}
+<style>
+  .chart div {
+  /* font: 10px sans-serif; */
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  color: white;
+  }
+  .axis path, .axis line {
+    fill: none;
+    stroke: #fff;
+  }
+  .axis text {
+    font-size: 13px;
+  }
+  .bar {
+      fill: #E5C3D1;
+    }
+  .bar:hover {
+      fill: #F56C4E;
+    }
+  svg text.label {
+    fill:black;
+    font: 15px;
+    font-weight: 400;
+    text-anchor: middle;
+  }
+</style>
+{% endblock %}
+
 {% block body %}
 <div style = "margin-left: 15px; margin-right: 15px;">
   <a href="/" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Home</a>
@@ -18,12 +49,12 @@
       </div>
       <br>
       {% for state in states %}
-      <div class="row">
+      <div class="row" style = "margin-left: 5px; margin-right: 5px;">
           <h2>{{state}}</h2> &nbsp;
       </div>
       {% endfor %}
       {% for country in countries %}
-      <div class="row">
+      <div class="row" style = "margin-left: 5px; margin-right: 5px;">
           <h2>{{country}}</h2> &nbsp;
       </div>
       {% endfor %}
