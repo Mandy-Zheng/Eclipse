@@ -193,3 +193,7 @@ tiffanyC -- 2020-05-05 09:53
 yifanW -- 2020-05-06 04:36
       -fixed syntax error in __init__.py
       -added function for displaying date (testing)
+
+junheeL -- 2020-05-06 08:25
+      -cleaned up javascript
+      -modified /data to include date in return value
