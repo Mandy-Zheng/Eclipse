@@ -187,9 +187,9 @@ junheeL -- 2020-05-05 09:48
       -fixed javascript data retrieval functions
       -fixed python backend to return proper data
 
-tiffanyC -- 2020-05-04 09:53
+tiffanyC -- 2020-05-05 09:53
       -played around with checkbox styling in query.html
 
-yifanW -- 2020-05-05 22:24
+yifanW -- 2020-05-06 04:36
       -fixed syntax error in __init__.py
       -added function for displaying date (testing)
