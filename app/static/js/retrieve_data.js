@@ -24,7 +24,6 @@ const getData = function(daysElapsed) {
             data = retrieved;
         }
     });
-    return data;
 };
 
 // var displayDate = function(daysElapsed) {

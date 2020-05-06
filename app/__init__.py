@@ -107,11 +107,11 @@ def displayData():
 @app.route('/data', methods=['POST'])
 def jsonData():
     c, s = decode(request.form['q'])
-    day0 = date.fromisoformat('2020-01-21')
+    day = date.fromisoformat('2020-01-21') + timedelta(days=int(request.form['date']))
     try:
-        c = [format(row) for row in countries if row[0] == day0 + timedelta(days=int(request.form['date'])) and row[1] in c]
-        s = [format(row) for row in states if row[0] == day0 + timedelta(days=int(request.form['date'])) and row[1] in s]
-        return json.dumps(c + s)
+        c = [format(row) for row in countries if row[0] == day and row[1] in c]
+        s = [format(row) for row in states if row[0] == day and row[1] in s]
+        return json.dumps([day.isoformat()] + c + s)
     except KeyError:
         c = [format(row) for row in countries if row[1] in c]
         s = [format(row) for row in states if row[1] in s]
