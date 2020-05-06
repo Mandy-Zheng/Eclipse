@@ -19,15 +19,15 @@ def loadData(data, csvfile):
         reader = csv.reader(f)
         next(reader, None)
         for row in reader:
-            date = row[0].split('-')
-            datestring = ''.join(date)
+            indDate = row[0].split('-')
+            datestring = ''.join(indDate)
             row[0] = date.fromisoformat('-'.join((datestring[:4], datestring[4:6], datestring[6:])))
             data.append(row)
 
 @app.route('/')
 def home():
     return render_template("welcome.html", title="COVID-19 Tracker", heading="Welcome to COVID-19 Tracker!", date = "May 4, 2020")
-    
+
 @app.route('/query', methods=['GET'])
 def query():
     statesList=abbrev.keys()

@@ -165,7 +165,7 @@ junheeL -- 2020-05-04 08:54
       -turns out the error wasn't fixed, changed ordering of addition of strings to eliminate bug with encoding
 
 yifanW -- 2020-05-04 11:20
-      -fixed gridding for countries based on new list
+      -fixed grid layout for countries based on new list
 
 amandaZ -- 2020-05-04 22:03
       -made dummy vertical bar charts based off of data
@@ -189,3 +189,7 @@ junheeL -- 2020-05-05 09:48
 
 tiffanyC -- 2020-05-04 09:53
       -played around with checkbox styling in query.html
+
+yifanW -- 2020-05-05 22:24
+      -fixed syntax error in __init__.py
+      -added function for displaying date (testing)

@@ -40,6 +40,7 @@
 {% block body %}
 <div style = "margin-left: 15px; margin-right: 15px;">
   <a href="/" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Home</a>
+  <a href="/query" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Back</a>
     <br>
     <center>
       <div class="row">
@@ -47,10 +48,15 @@
           <h1>Data Display</h1>
           {{text}}
           <br>
-          <div class="slidecontainer">
-            Select the Date:
-            <input type="range" min="1" max="100" value="50" class="slider" id="dateSlider">
+          <div class="d-flex justify-content-center my-4">
+            <form class="range-field w-75">
+              Select the Date &nbsp;
+              <input type="range" min="1" max="100" class="slider" id="dateSlider">
+            </form>
+            <span class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span>
           </div>
+          <button id="dateBtn">Select</button>
+          <p id="date">January 22, 2020</p>
         </div>
       </div>
       <br>
@@ -66,8 +72,7 @@
       {% endfor %}
     </center>
       <div id="chartID"></div>
-    <script type="text/javascript">
-    </script>
+    <script type="text/javascript"></script>
     <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
     <script src="{{ url_for('static', filename='js/index.js')}}"></script>
 </div>
