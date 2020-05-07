@@ -13,6 +13,27 @@ const getQuery = function() {
     }
 };
 
+const formatDate = function(datestr) {
+    components = datestr.split('-');
+    var months = {
+        '01':'January',
+        '02':'February',
+        '03':'March',
+        '04':'April',
+        '05':'May',
+        '06':'June',
+        '07':'July',
+        '08':'August',
+        '09':'September',
+        '10':'October',
+        '11':'November',
+        '12':'December'
+    };
+    return `${months[components[1]]} ${components[2]}, ${components[0]}`
+}
+
+const slider = document.getElementById('dateSlider');
+
 const getData = function(daysElapsed) {
     //daysElapsed should be from 2020-01-21
     var query = getQuery();
@@ -21,10 +42,21 @@ const getData = function(daysElapsed) {
         url: '/data',
         data: {'q': query, 'date': daysElapsed},
         success: function(retrieved) {
-            data = retrieved;
+            var date = document.getElementById('dateSelected');
+            date.innerHTML = formatDate(retrieved['date']);
+            data = retrieved['data'][0];
+            render();
         }
     });
 };
+
+const update = function() {
+    getData(slider.value);
+}
+
+slider.addEventListener('input', update);
+
+slider.value = 1;
 
 // var displayDate = function(daysElapsed) {
 //   console.log(daysElapsed);

@@ -72,7 +72,6 @@
             </form>
             <span class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span>
           </div>
-          <button type="button" class="btn btn-warning" id="dateBtn">Tester Button</button>
           <p id="dateSelected">January 22, 2020</p>
         </div>
       </div>
@@ -94,8 +93,8 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/static/js/retrieve_data.js"></script>
 <script type="text/javascript"></script>
 <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 <script src="{{ url_for('static', filename='js/index.js')}}"></script>
+<script src="/static/js/retrieve_data.js"></script>
 {% endblock %}
