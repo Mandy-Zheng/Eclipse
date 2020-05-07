@@ -41,7 +41,7 @@ max2 = d3.max(data, function(d) { return d.deaths; });
 // console.log(max2);
 findM = [max1, max2]
 //sets the scale of the xscale initially
-xScale.domain([0, d3.max(findM)]);
+xScale.domain([0, d3.max(findM) + 2]);
 // xScale.domain([0, function(d) { if (d3.max(d.cases) >= d3.max(d.deaths)) { return d3.max(d.cases) + 1 } else { return d3.max(d.deaths) + 1 }}]);
 // console.log(xScale)
 
@@ -102,28 +102,37 @@ svgContainer.append("g")
       .selectAll("text")
       // .attr("font-family", "Didot")
 
-// svgContainer.selectAll(".legend")
-//     .data(data)
-//     .enter().append("g")
-//     .attr("class", "legend")
-//     .attr("transform", function(d,i) { return "translate(0," + i * 20 + ")"; })
-//     .style("opacity","0");
-//
-// color = d3.scale.ordinal()
-//     .range(["#f4a582","#0571b0"]);
-//
-// legend.append("rect")
-//     .attr("x", width - 18)
-//     .attr("width", 18)
-//     .attr("height", 18)
-//     .style("fill", function(d) { return color(d); });
-//
-// legend.append("text")
-//     .attr("x", width - 24)
-//     .attr("y", 9)
-//     .attr("dy", ".35em")
-//     // .style("text-anchor", "end")
-//     .text(function(d) {return d.country; });
+legend = svgContainer.selectAll(".legend")
+    .data(data)
+    .enter().append("g")
+    .attr("class", "legend")
+    .attr("transform", "translate(0,0)");
+
+legend.append("rect")
+    .attr("class", "option1")
+    .attr("x", width)
+    .attr("y", 10)
+    .attr("width", 18)
+    .attr("height", 18)
+    .style("fill", "#E5C3D1");
+
+legend.append("rect")
+    .attr("x", width)
+    .attr("class", "option2")
+    .attr("y", 40)
+    .attr("width", 18)
+    .attr("height", 18)
+    .style("fill", "#CAA8F5");
+
+legend.append("text")
+    .attr("x", width - 70)
+    .attr("y", 25)
+    .text("Option1");
+
+legend.append("text")
+    .attr("x", width - 70)
+    .attr("y", 55)
+    .text("Option2");
 
 //displaying date
 // var daysElapsed = document.getElementById("dateSlider").value;

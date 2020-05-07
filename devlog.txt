@@ -214,3 +214,7 @@ junheeL -- 2020-05-07 09:16
 tiffanyC -- 2020-05-07 11:22
       -created dummy horizontal bar charts for grouped bars
       -updated stylization in data.html for grouped bar chart
+
+tiffanyC -- 2020-05-07 11:50
+      -created a legend for the grouped bar chart dummy
+      -tried implementing color change when hovering over legend but failed
