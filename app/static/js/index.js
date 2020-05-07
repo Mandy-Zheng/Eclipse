@@ -70,3 +70,51 @@ svgContainer.append("g")
       .attr("class", "yaxis")
       .call(yAxis)
       .selectAll("text");
+
+
+//pie chart code
+
+var pwidth = 250
+var pheight = 250
+var margin= 40
+
+var radius = Math.min(width, height) / 2 - margin
+var svg = d3.select("#pieID")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height)
+  .append("g")
+  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+
+// set the color scale
+var color = d3.scaleOrdinal()
+  .domain([0, d3.max(data, function(d) { return d.cases+1; })])
+  .range(d3.schemeDark2);
+
+var pie = d3.pie()
+      .value(function(d) {return d.value; })
+      .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+var data_ready = pie(d3.entries(data))
+
+    // map to data
+var u = svg.selectAll("path")
+      .data(data_ready)
+
+    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+    u
+      .enter()
+      .append('path')
+      .merge(u)
+      .transition()
+      .duration(1000)
+      .attr('d', d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius)
+      )
+      .attr('fill', function(d){ return(color(d.cases)) })
+      .attr("stroke", "white")
+      .style("stroke-width", "2px")
+      .style("opacity", 1)
+
+// A function that create / update the plot for a given variable:

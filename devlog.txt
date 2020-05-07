@@ -179,3 +179,9 @@ tiffanyC -- 2020-05-04 22:28
 
 junheeL -- 2020-05-05 07:47
       -updated the getData() js fxn to properly return retrieved data
+
+amandaZ -- 2020-05-05 08:47
+      -made checklist for datatypes the user wants displayed
+
+amandaZ -- 2020-05-05 23:23
+      -research and experimenting with pie charts

@@ -45,6 +45,21 @@
             Select the Date:
             <input type="range" min="1" max="100" value="50" class="slider" id="dateSlider">
           </div>
+          <div>
+            <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+              <input type="checkbox" class="form-check-input filled-in" id="d" name="type" checked>
+              <label class="form-check-label">Deaths</label>
+            </span>
+            <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+              <input type="checkbox" class="form-check-input filled-in" id="r" name="type">
+              <label class="form-check-label">Recoveries</label>
+            </span>
+            <span class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+              <input type="checkbox" class="form-check-input filled-in" id="n" name="type">
+              <label class="form-check-label">New Cases</label>
+            </span>
+
+            </div>
         </div>
       </div>
       <br>
@@ -60,6 +75,7 @@
       {% endfor %}
     </center>
       <div id="chartID"></div>
+      <div id="pieID"></div>
     <script type="text/javascript">
     </script>
     <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
