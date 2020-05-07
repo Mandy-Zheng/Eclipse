@@ -99,9 +99,9 @@ var displayDate = function(daysElapsed) {
   document.getElementById("date").innerHTML = month + day.toString() + ", 2020";
 };
 
-var dateBtn = getElementById("dateBtn");
+var dateBtn = document.getElementById("dateBtn");
 //dateBtn.addEventListener("click", displayDate);
-dateBtn.addEventListener("click", document.getElementById("date").innerHTML = "hi");
+dateBtn.addEventListener("click", document.getElementById("dateSelected").innerHTML = "hi");
 
 /*      .selectAll("text");
 

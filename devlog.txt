@@ -180,13 +180,6 @@ tiffanyC -- 2020-05-04 22:28
 junheeL -- 2020-05-05 07:47
       -updated the getData() js fxn to properly return retrieved data
 
-<<<<<<< HEAD
-amandaZ -- 2020-05-05 08:47
-      -made checklist for datatypes the user wants displayed
-
-amandaZ -- 2020-05-05 23:23
-      -research and experimenting with pie charts
-=======
 tiffanyC -- 2020-05-05 09:12
       -fixed fonts of axes and labels in bar chart
 
@@ -204,4 +197,12 @@ yifanW -- 2020-05-06 04:36
 junheeL -- 2020-05-06 08:25
       -cleaned up javascript
       -modified /data to include date in return value
->>>>>>> 5da1fe689b6e7ec5bc126b5248011881c73a1c28
+
+amandaZ -- 2020-05-06 08:47
+      -made checklist for datatypes the user wants displayed
+
+amandaZ -- 2020-05-06 23:23
+      -research and experimenting with pie charts
+
+yifanW -- 2020-05-07 03:34
+      -basic styling of data.html
