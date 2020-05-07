@@ -165,7 +165,7 @@ junheeL -- 2020-05-04 08:54
       -turns out the error wasn't fixed, changed ordering of addition of strings to eliminate bug with encoding
 
 yifanW -- 2020-05-04 11:20
-      -fixed gridding for countries based on new list
+      -fixed grid layout for countries based on new list
 
 amandaZ -- 2020-05-04 22:03
       -made dummy vertical bar charts based off of data
@@ -180,8 +180,28 @@ tiffanyC -- 2020-05-04 22:28
 junheeL -- 2020-05-05 07:47
       -updated the getData() js fxn to properly return retrieved data
 
+<<<<<<< HEAD
 amandaZ -- 2020-05-05 08:47
       -made checklist for datatypes the user wants displayed
 
 amandaZ -- 2020-05-05 23:23
       -research and experimenting with pie charts
+=======
+tiffanyC -- 2020-05-05 09:12
+      -fixed fonts of axes and labels in bar chart
+
+junheeL -- 2020-05-05 09:48
+      -fixed javascript data retrieval functions
+      -fixed python backend to return proper data
+
+tiffanyC -- 2020-05-05 09:53
+      -played around with checkbox styling in query.html
+
+yifanW -- 2020-05-06 04:36
+      -fixed syntax error in __init__.py
+      -added function for displaying date (testing)
+
+junheeL -- 2020-05-06 08:25
+      -cleaned up javascript
+      -modified /data to include date in return value
+>>>>>>> 5da1fe689b6e7ec5bc126b5248011881c73a1c28

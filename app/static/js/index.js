@@ -1,5 +1,5 @@
-var data =  [{"country":"Canada","cases":7},
-{"country":"China","cases":7},{"country":"France","cases":5}]
+// var data =  [{"country":"Canada","cases":7},
+// {"country":"China","cases":7},{"country":"France","cases":5}]
 //defining the margin amounts of the chart
 var margin = {top:50, right:50, bottom:50, left:50};
 //the total width of the bar graph
@@ -63,13 +63,47 @@ svgContainer.selectAll(".text")
 svgContainer.append("g")
       .attr("class", "xaxis")
       .call(xAxis)
-      .selectAll("text");
-
+      .selectAll("text")
+      // .attr("font-family", "Didot")
 
 svgContainer.append("g")
       .attr("class", "yaxis")
       .call(yAxis)
-      .selectAll("text");
+      .selectAll("text")
+      // .attr("font-family", "Didot")
+
+//displaying date
+var daysElapsed = document.getElementById("dateSlider").value;
+
+var displayDate = function(daysElapsed) {
+  console.log(daysElapsed);
+
+  var month = '';
+  var day;
+  if (daysElapsed <= 10){
+    month = "January";
+    day = 21 + daysElapsed;
+  } else if (daysElapsed <= 39) {
+    month = "February";
+    day = daysElapsed - 10;
+  } else if (daysElapsed <= 70) {
+    month = "March";
+    day = daysElapsed - 39;
+  } else if (daysElapsed <= 100) {
+    month = "April";
+    day = daysElapsed - 70;
+  } else {
+    month = "May";
+    day = daysElapsed - 100;
+  }
+  document.getElementById("date").innerHTML = month + day.toString() + ", 2020";
+};
+
+var dateBtn = getElementById("dateBtn");
+//dateBtn.addEventListener("click", displayDate);
+dateBtn.addEventListener("click", document.getElementById("date").innerHTML = "hi");
+
+/*      .selectAll("text");
 
 
 //pie chart code
@@ -118,3 +152,4 @@ var u = svg.selectAll("path")
       .style("opacity", 1)
 
 // A function that create / update the plot for a given variable:
+=======*/
