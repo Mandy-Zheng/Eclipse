@@ -105,17 +105,12 @@ def displayData():
     return render_template("data.html", states=dataRequestS, countries=dataRequestC)
 
 @app.route('/data', methods=['POST'])
-def jsonData():
+def getData():
     c, s = decode(request.form['q'])
     day = date.fromisoformat('2020-01-21') + timedelta(days=int(request.form['date']))
-    try:
-        c = [format(row) for row in countries if row[0] == day and row[1] in c]
-        s = [format(row) for row in states if row[0] == day and row[1] in s]
-        return json.dumps([day.isoformat()] + c + s)
-    except KeyError:
-        c = [format(row) for row in countries if row[1] in c]
-        s = [format(row) for row in states if row[1] in s]
-        return json.dumps(c + s)
+    c = [format(row) for row in countries if row[0] == day and row[1] in c]
+    s = [format(row) for row in states if row[0] == day and row[1] in s]
+    return {'date': day.isoformat(), 'data': [c + s]}
 
 def format(data, state=False):
     if state:
