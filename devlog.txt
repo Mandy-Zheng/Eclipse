@@ -46,7 +46,7 @@ yifanW -- 2020-04-26 19:56
 
 junheeL -- 2020-04-26 20:51
       -added Back End description
-      -added diagram of "Jouney of the Data"
+      -added diagram of "Journey of the Data"
 
 amandaZ -- 2020-04-26 21:11
       -added API section in Design Doc
@@ -206,3 +206,7 @@ amandaZ -- 2020-05-06 23:23
 
 yifanW -- 2020-05-07 03:34
       -basic styling of data.html
+
+tiffanyC -- 2020-05-07 11:22
+      -created dummy horizontal bar charts for grouped bars
+      -updated stylization in data.html for grouped bar chart

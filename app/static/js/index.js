@@ -1,24 +1,25 @@
-// var data =  [{"country":"Canada","cases":7},
-// {"country":"China","cases":7},{"country":"France","cases":5}]
+// var data =  [{"country":"Canada","cases":7,"deaths":10},
+// {"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
+
 //defining the margin amounts of the chart
 var margin = {top:50, right:50, bottom:50, left:50};
 //the total width of the bar graph
-var height = data.length*200-100;
+var height = 3*200-100;
 //the total height of the bar graph
 var width = 800-100;
 
 
-//sets the number of pixels for the xscale
+//sets the number of pixels for the yscale
 //adds padding
 var yScale = d3.scaleBand()
   .range([0, height])
-  .paddingInner(0.05)
+  .paddingInner(0.08)
 
-//sets the number of pixels for the yscale
+//sets the number of pixels for the xscale
 var xScale = d3.scaleLinear()
       .range([0,width-50]);
 
-//positions the x axis on the bottom
+//positions the x axis on the top
 var xAxis = d3.axisTop(xScale)
 //positions the y axis on the left
 var yAxis = d3.axisLeft(yScale);
@@ -31,33 +32,62 @@ var svgContainer = d3.select("#chartID").append("svg")
     .append("g").attr("class", "container")
     .attr("transform", "translate("+ 50 +","+ 50 +")");
 
-//for each bar, maps the labels of x scale based on d.country
+//for each bar, maps the labels of y scale based on d.cases and d.deaths
 yScale.domain(data.map(function(d) { return d.country; }));
 
-//sets the scale of the yscale initially
-xScale.domain([0, d3.max(data, function(d) { return d.cases+1; })]);
+max1 = d3.max(data, function(d) { return d.cases; });
+max2 = d3.max(data, function(d) { return d.deaths; });
+// console.log(max1);
+// console.log(max2);
+findM = [max1, max2]
+//sets the scale of the xscale initially
+xScale.domain([0, d3.max(findM)]);
+// xScale.domain([0, function(d) { if (d3.max(d.cases) >= d3.max(d.deaths)) { return d3.max(d.cases) + 1 } else { return d3.max(d.deaths) + 1 }}]);
+// console.log(xScale)
 
 //draws the actual bars and does the height based off of data values
-svgContainer.selectAll(".bar")
+bars = svgContainer.selectAll(".bar")
     	.data(data)
     	.enter()
-    	.append("rect")
+      .append("g")
+
+//option1
+bars.append("rect")
     	.attr("class", "bar")
     	.attr("y", function(d) { return yScale(d.country); })
-    	.attr("height", yScale.bandwidth())
+    	.attr("height", yScale.bandwidth()/2)
     	.attr("x", function(d) { return 0; })
-    	.attr("width", function(d) { return xScale(d.cases); });
+    	.attr("width", function(d) { return xScale(d.cases); })
+
+//option2
+bars.append("rect")
+      .attr("class", "bar2")
+      .attr("y", function(d) { return yScale(d.country); })
+      .attr("width", function(d) { return xScale(d.deaths); })
+      .attr("height", yScale.bandwidth()/2)
+      .attr("x", function(d) { return 0; })
+      .attr("transform", function(d) { return "translate(0, "+ yScale.bandwidth()/2 +")"; });
 
 //make the numbers on the labels, x value and y value of the numerical labels
-svgContainer.selectAll(".text")
+
+labeling = svgContainer.selectAll(".text")
       .data(data)
       .enter()
-    	.append("text")
+
+labeling.append("text")
      	.attr("class","label")
-     	.attr("y", (function(d) { return yScale(d.country) + yScale.bandwidth() / 2 ; }  ))
+     	.attr("y", (function(d) { return yScale(d.country) + yScale.bandwidth() / 4 ; }  ))
      	.attr("x", function(d) { return  xScale(d.cases) + 10; })
       .attr("dx", ".75em")
     	.text(function(d) { return d.cases; });
+
+labeling.append("text")
+      .attr("class", "label")
+      .attr("x", function(d) { return xScale(d.deaths) + 10; })
+      .attr("y", (function(d) { return yScale(d.country) + ((yScale.bandwidth() / 4) * 3) ; } ))
+      .attr("dx", ".75em")
+      .text(function(d) {return  d.deaths;})
+
 //creates labels for y scale on the side
 
 svgContainer.append("g")
@@ -72,36 +102,59 @@ svgContainer.append("g")
       .selectAll("text")
       // .attr("font-family", "Didot")
 
+// svgContainer.selectAll(".legend")
+//     .data(data)
+//     .enter().append("g")
+//     .attr("class", "legend")
+//     .attr("transform", function(d,i) { return "translate(0," + i * 20 + ")"; })
+//     .style("opacity","0");
+//
+// color = d3.scale.ordinal()
+//     .range(["#f4a582","#0571b0"]);
+//
+// legend.append("rect")
+//     .attr("x", width - 18)
+//     .attr("width", 18)
+//     .attr("height", 18)
+//     .style("fill", function(d) { return color(d); });
+//
+// legend.append("text")
+//     .attr("x", width - 24)
+//     .attr("y", 9)
+//     .attr("dy", ".35em")
+//     // .style("text-anchor", "end")
+//     .text(function(d) {return d.country; });
+
 //displaying date
-var daysElapsed = document.getElementById("dateSlider").value;
-
-var displayDate = function(daysElapsed) {
-  console.log(daysElapsed);
-
-  var month = '';
-  var day;
-  if (daysElapsed <= 10){
-    month = "January";
-    day = 21 + daysElapsed;
-  } else if (daysElapsed <= 39) {
-    month = "February";
-    day = daysElapsed - 10;
-  } else if (daysElapsed <= 70) {
-    month = "March";
-    day = daysElapsed - 39;
-  } else if (daysElapsed <= 100) {
-    month = "April";
-    day = daysElapsed - 70;
-  } else {
-    month = "May";
-    day = daysElapsed - 100;
-  }
-  document.getElementById("date").innerHTML = month + day.toString() + ", 2020";
-};
-
-var dateBtn = document.getElementById("dateBtn");
-//dateBtn.addEventListener("click", displayDate);
-dateBtn.addEventListener("click", document.getElementById("dateSelected").innerHTML = "hi");
+// var daysElapsed = document.getElementById("dateSlider").value;
+//
+// var displayDate = function(daysElapsed) {
+//   console.log(daysElapsed);
+//
+//   var month = '';
+//   var day;
+//   if (daysElapsed <= 10){
+//     month = "January";
+//     day = 21 + daysElapsed;
+//   } else if (daysElapsed <= 39) {
+//     month = "February";
+//     day = daysElapsed - 10;
+//   } else if (daysElapsed <= 70) {
+//     month = "March";
+//     day = daysElapsed - 39;
+//   } else if (daysElapsed <= 100) {
+//     month = "April";
+//     day = daysElapsed - 70;
+//   } else {
+//     month = "May";
+//     day = daysElapsed - 100;
+//   }
+//   document.getElementById("date").innerHTML = month + day.toString() + ", 2020";
+// };
+//
+// var dateBtn = document.getElementById("dateBtn");
+// //dateBtn.addEventListener("click", displayDate);
+// dateBtn.addEventListener("click", document.getElementById("dateSelected").innerHTML = "hi");
 
 /*      .selectAll("text");
 
