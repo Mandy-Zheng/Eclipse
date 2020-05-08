@@ -248,20 +248,20 @@ const render = function(){
 // dateBtn.addEventListener("click", document.getElementById("dateSelected").innerHTML = "hi");
 */
 
-var data1 =  [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
+var data =  [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
 {"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
 
-function createpie (data, index){
+for (var i = 0; i < data.length; i++) {
 // set the dimensions and margins of the graph
 var width = 450
     height = 450
-    margin = 40
+    margin = 50
 
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
 var radius = Math.min(width, height) / 2 - margin
 
 // append the svg object to the div called 'my_dataviz'
-var svg = d3.select("#pieID" + index.toString())
+var svg = d3.select("#pieID")
   .append("svg")
     .attr("width", width)
     .attr("height", height)
@@ -270,7 +270,7 @@ var svg = d3.select("#pieID" + index.toString())
 
 // set the color scale
 var color = d3.scaleOrdinal()
-  .domain(data)
+  .domain(data[i])
   .range(d3.schemeDark2);
 
 // A function that create / update the plot for a given variable:
@@ -280,11 +280,11 @@ var color = d3.scaleOrdinal()
   var pie = d3.pie()
     .value(function(d) {return d.value; })
     .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
-  var data_ready = pie(d3.entries(data[index]))
+  var data_ready = pie(d3.entries(data[i]))
 
   var label = d3.arc()
-            .outerRadius(radius)
-            .innerRadius(radius - 20);
+            .outerRadius(radius+60)
+            .innerRadius(radius);
 
   // map to data
   var u = svg.selectAll("path")
@@ -312,14 +312,11 @@ var color = d3.scaleOrdinal()
       .append("text")                                     //add a label to each slice
       .attr("transform", function(d) {                //set the label's origin to the center of the arc
             //we have to make sure to set these before calling arc.centroid
-        d.innerRadius = 0;
-        d.outerRadius = r;
-        return "translate(" + label.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+        return "translate(" +label.centroid(d)+ ")";        //this gives us a pair of coordinates like [50, 50]
       })
       .attr("text-anchor", "middle")                          //center the text on it's origin
       .text(function(d) {
         if(!Number.isNaN(d.value)){
-          console.log(d.data.key);
   			  return d.data.key;
         }
       })
@@ -328,6 +325,8 @@ var color = d3.scaleOrdinal()
   u
     .exit()
     .remove()
+
+
 
   // u
   //   .append("text")
@@ -345,9 +344,6 @@ var color = d3.scaleOrdinal()
 //   createpie(data1, i);
 // };
 
-createpie(data1, 0);
-createpie(data1, 1);
-createpie(data1, 2);
 
 // var countriesList = [];
 // for (i = 0; i < data.length, i++) {
