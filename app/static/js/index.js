@@ -248,6 +248,10 @@ const render = function(){
 // dateBtn.addEventListener("click", document.getElementById("dateSelected").innerHTML = "hi");
 */
 
+var data1 =  [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
+{"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
+
+function createpie (data, index){
 // set the dimensions and margins of the graph
 var width = 450
     height = 450
@@ -257,31 +261,30 @@ var width = 450
 var radius = Math.min(width, height) / 2 - margin
 
 // append the svg object to the div called 'my_dataviz'
-var svg = d3.select("#pieID")
+var svg = d3.select("#pieID" + index.toString())
   .append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-// create 2 data_set
-var data = {death: 9, recoveries: 20, newCases:30}
-var data1 =  [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
-{"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
-
 // set the color scale
 var color = d3.scaleOrdinal()
-  .domain(data1)
+  .domain(data)
   .range(d3.schemeDark2);
 
 // A function that create / update the plot for a given variable:
-function update(data) {
+//
 
   // Compute the position of each group on the pie:
   var pie = d3.pie()
     .value(function(d) {return d.value; })
     .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
-  var data_ready = pie(d3.entries(data))
+  var data_ready = pie(d3.entries(data[index]))
+
+  var label = d3.arc()
+            .outerRadius(radius)
+            .innerRadius(radius - 20);
 
   // map to data
   var u = svg.selectAll("path")
@@ -298,17 +301,56 @@ function update(data) {
       .innerRadius(0)
       .outerRadius(radius)
     )
-    .attr('fill', function(d){ return(color(d.data.key)) })
+    .attr('fill', function(d){return(color(d.data.key)) })
     .attr("stroke", "white")
     .style("stroke-width", "2px")
     .style("opacity", 1)
+
+  svg.selectAll(".text")
+    .data(data_ready)
+    .enter()
+      .append("text")                                     //add a label to each slice
+      .attr("transform", function(d) {                //set the label's origin to the center of the arc
+            //we have to make sure to set these before calling arc.centroid
+        d.innerRadius = 0;
+        d.outerRadius = r;
+        return "translate(" + label.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+      })
+      .attr("text-anchor", "middle")                          //center the text on it's origin
+      .text(function(d) {
+        if(!Number.isNaN(d.value)){
+          console.log(d.data.key);
+  			  return d.data.key;
+        }
+      })
 
   // remove the group that is not present anymore
   u
     .exit()
     .remove()
 
-}
+  // u
+  //   .append("text")
+  // 	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+  // 	.text(function(d) { return d.data1.country;})
+  // 	.style("fill", "#fff");
+
+//}
 
 // Initialize the plot with the first dataset
-update(data1[0])
+//update(data1[0])
+}
+
+// for (i=0; i < Object.keys(data1); i++){
+//   createpie(data1, i);
+// };
+
+createpie(data1, 0);
+createpie(data1, 1);
+createpie(data1, 2);
+
+// var countriesList = [];
+// for (i = 0; i < data.length, i++) {
+//   countriesList.push(data[i]["country"]);
+// };
+// console.log(countriesList);
