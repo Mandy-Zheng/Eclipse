@@ -223,3 +223,9 @@ tiffanyC -- 2020-05-08 21:20
       -created two separate functions for single bar chart and double bar chart
       -merged with pie charts, created new branch called 'bars' for transitioning of bars
       -added to function creating new graphs
+
+tiffanyC -- 2020-05-09 00:25
+      -created transitioning of data for single and double bar graphs
+      -fixed bugs for displaying single and double bar graphs
+      -changed legend to circles
+      -added offset to xScale for bar graphs
