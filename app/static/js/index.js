@@ -436,7 +436,8 @@ var clearChart = function(){
 }
 
 var newGraph = function(){
-  var data =  [{"location":"Canada", "cases":5, "deaths":1, "recovered":10},
+  // num = 0;
+  var data =  [{"location":"Canada", "cases":canadaN[num], "deaths":canadaD[num], "recovered":canadaR[num]},
 {"location":"China","cases":7,"deaths": 15, "recovered": 25},{"location":"France","cases":5,"deaths":20, "recovered": 8}]
 // console.log(data);
   var d = document.getElementById("d").checked;
