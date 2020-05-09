@@ -217,7 +217,52 @@ const render = function(){
         .selectAll("text")
         // .attr("font-family", "Didot")
 };
-
+var clearChart = function(){
+  d3.selectAll("svg > *").remove();
+}
+var newGraph = function(){
+  var r = document.getElementById("r").checked
+  var d =document.getElementById("d").checked
+  var n =document.getElementById("n").checked
+  clearChart();
+  var data =  [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
+{"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
+  if(r && d && n ){
+    initalPie(data);
+  }else if( r && d){
+    var subData=[]
+    for (var i = 0; i < data.length; i++) {
+     var dict={}
+     dict.countries=data[i].countries;
+     dict.recoveries=data[i].recoveries;
+     dict.deaths=data[i].deaths;
+     subData.append(dict);
+    }
+    initalBar2(subData);
+  }else if( r && n){
+    var subData=[]
+    for (var i = 0; i < data.length; i++) {
+     var dict={}
+     dict.countries=data[i].countries;
+     dict.cases=data[i].cases;
+     dict.recoveries=data[i].recoveries;
+     subData.append(dict);
+    }
+    initalBar2(subData);
+  }else if( n && d){
+    var subData=[]
+    for (var i = 0; i < data.length; i++) {
+     var dict={}
+     dict.countries=data[i].countries;
+     dict.cases=data[i].cases;
+     dict.deaths=data[i].deaths;
+     subData.append(dict);
+    }
+    initalBar2(subData);
+  }else if( r || d || n){
+    initalBar(data);
+  }
+}
 //displaying date          <button type="button" class="btn btn-warning" id="dateBtn">Tester Button</button>
 // var daysElapsed = document.getElementById("dateSlider").value;
 
