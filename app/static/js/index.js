@@ -312,46 +312,65 @@ var clearChart = function(){
   d3.selectAll("svg").remove();
 }
 var newGraph = function(){
+  var data =  [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
+{"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
   var r = document.getElementById("r").checked;
   var d =document.getElementById("d").checked;
   var n =document.getElementById("n").checked;
-  console.log(r);
+  var subData=[]
   clearChart();
-  var data =  [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
-{"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
   if(r && d && n ){
     initialPie(data);
   }else if( r && d){
-    var subData=[]
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.countries=data[i].countries;
-     dict.recoveries=data[i].recoveries;
-     dict.deaths=data[i].deaths;
+     dict.option1=data[i].recoveries;
+     dict.option2=data[i].deaths;
      subData.push(dict);
     }
     initialBar2(subData);
   }else if( r && n){
-    var subData=[]
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.countries=data[i].countries;
-     dict.cases=data[i].cases;
-     dict.recoveries=data[i].recoveries;
+     dict.option1=data[i].cases;
+     dict.option2=data[i].recoveries;
      subData.push(dict);
     }
     initialBar2(subData);
   }else if( n && d){
-    var subData=[]
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.countries=data[i].countries;
-     dict.cases=data[i].cases;
-     dict.deaths=data[i].deaths;
+     dict.option1=data[i].cases;
+     dict.option2=data[i].deaths;
      subData.push(dict);
     }
     initialBar2(subData);
   }else if( r || d || n){
+    if(r){
+      for (var i = 0; i < data.length; i++) {
+       var dict={}
+       dict.countries=data[i].countries;
+       dict.option1=data[i].recoveries;
+       subData.push(dict);
+      }
+    }else if(d){
+      for (var i = 0; i < data.length; i++) {
+       var dict={}
+       dict.countries=data[i].countries;
+       dict.option1=data[i].deaths;
+       subData.push(dict);
+      }
+    }else{
+      for (var i = 0; i < data.length; i++) {
+       var dict={}
+       dict.countries=data[i].countries;
+       dict.option1=data[i].cases;
+       subData.push(dict);
+      }
+    }
     initialBar1(data);
   }
 }
