@@ -45,13 +45,14 @@ const getData = function(daysElapsed) {
             var date = document.getElementById('dateSelected');
             date.innerHTML = formatDate(retrieved['date']);
             data = retrieved['data'][0];
-            render();
+            render(data);
         }
     });
 };
 
 const update = function() {
     getData(slider.value);
+    if (chartType == "pie"):
 }
 
 slider.addEventListener('input', update);

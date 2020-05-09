@@ -2,7 +2,7 @@ var data =  [{"country":"Canada","cases":7,"deaths":10},
 {"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
 
 //defining the margin amounts of the chart
-
+var chartType = "";
 
 var initialBar1 = function(d){
   var margin = {top:50, right:50, bottom:50, left:50};
@@ -319,9 +319,12 @@ var newGraph = function(){
   var n =document.getElementById("n").checked;
   var subData=[]
   clearChart();
+  chartType="";
   if(r && d && n ){
+    chartType="pie";
     initialPie(data);
   }else if( r && d){
+    chartType="bar2";
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.countries=data[i].countries;
@@ -331,6 +334,7 @@ var newGraph = function(){
     }
     initialBar2(subData);
   }else if( r && n){
+    chartType="bar2";
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.countries=data[i].countries;
@@ -340,6 +344,7 @@ var newGraph = function(){
     }
     initialBar2(subData);
   }else if( n && d){
+    chartType="bar2";
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.countries=data[i].countries;
@@ -349,6 +354,7 @@ var newGraph = function(){
     }
     initialBar2(subData);
   }else if( r || d || n){
+    chartType="bar1";
     if(r){
       for (var i = 0; i < data.length; i++) {
        var dict={}
@@ -375,9 +381,7 @@ var newGraph = function(){
   }
 }
 
-// initialBar2(data);
 
-//displaying date
 var daysElapsed = document.getElementById("dateSlider").value;
 
 var displayDate = function(daysElapsed) {
