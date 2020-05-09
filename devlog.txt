@@ -218,3 +218,6 @@ tiffanyC -- 2020-05-07 11:22
 tiffanyC -- 2020-05-07 11:50
       -created a legend for the grouped bar chart dummy
       -tried implementing color change when hovering over legend but failed
+
+junheeL -- 2020-05-09 09:54
+      -got backend to return states' data

@@ -44,7 +44,7 @@ const getData = function(daysElapsed) {
         success: function(retrieved) {
             var date = document.getElementById('dateSelected');
             date.innerHTML = formatDate(retrieved['date']);
-            data = retrieved['data'][0]
+            data = retrieved['data']
         }
     });
     return data;

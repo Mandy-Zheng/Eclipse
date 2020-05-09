@@ -107,15 +107,20 @@ def displayData():
 @app.route('/data', methods=['POST'])
 def getData():
     c, s = decode(request.form['q'])
+    s = [abbrev[state] for state in s]
+    print(s)
     day = date.fromisoformat('2020-01-21') + timedelta(days=int(request.form['date']))
     c = [format(row) for row in countries if row[0] == day and row[1] in c]
-    s = [format(row) for row in states if row[0] == day and row[1] in s]
-    return {'date': day.isoformat(), 'data': [c + s]}
+    s = [format(row, True) for row in states if row[0] == day and row[1] in s]
+    print(s)
+    return {'date': day.isoformat(), 'data': c + s}
 
 def format(data, state=False):
+    print(data)
     if state:
         return {'location': data[1], 'cases': data[2], 'recovered': data[11], 'deaths': data[14]}
-    return {'location': data[1], 'cases': data[5], 'recovered': data[6], 'deaths': data[7]}
+    else:
+        return {'location': data[1], 'cases': data[5], 'recovered': data[6], 'deaths': data[7]}
 
 if __name__ == "__main__":
     app.debug = True
