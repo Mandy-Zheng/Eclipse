@@ -1,8 +1,4 @@
-var data =  [{"country":"Canada","cases":7,"deaths":10},
-{"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
-
 //defining the margin amounts of the chart
-
 
 var initialBar1 = function(d){
   var margin = {top:50, right:50, bottom:50, left:50};
@@ -231,6 +227,7 @@ var initialBar2 = function(d){
 
 }
 
+var updatePie;
 var initialPie = function(data){
   for (var i = 0; i < data.length; i++) {
   // set the dimensions and margins of the graph
@@ -256,6 +253,8 @@ var initialPie = function(data){
 
   // A function that create / update the plot for a given variable:
   //
+  var updatePie = function(data) {
+    for (var i = 0; i < data.length; i++) {
 
     // Compute the position of each group on the pie:
     var pie = d3.pie()
@@ -290,17 +289,17 @@ var initialPie = function(data){
     svg.selectAll(".text")
       .data(data_ready)
       .enter()
-        .append("text")                                     //add a label to each slice
-        .attr("transform", function(d) {                //set the label's origin to the center of the arc
-              //we have to make sure to set these before calling arc.centroid
-          return "translate(" +label.centroid(d)+ ")";        //this gives us a pair of coordinates like [50, 50]
-        })
-        .attr("text-anchor", "middle")                          //center the text on it's origin
-        .text(function(d) {
-          if(!Number.isNaN(d.value)){
-    			  return d.data.key;
-          }
-        })
+      .append("text")                                     //add a label to each slice
+      .attr("transform", function(d) {                //set the label's origin to the center of the arc
+            //we have to make sure to set these before calling arc.centroid
+        return "translate(" +label.centroid(d)+ ")";        //this gives us a pair of coordinates like [50, 50]
+      })
+      .attr("text-anchor", "middle")                          //center the text on it's origin
+      .text(function(d) {
+        if(!Number.isNaN(d.value)){
+    			 return d.data.key;
+        }
+      })
 
     // remove the group that is not present anymore
     u
@@ -308,19 +307,24 @@ var initialPie = function(data){
       .remove()
     }
   }
+  }
+}
+
 var clearChart = function(){
   d3.selectAll("svg").remove();
 }
+
 var newGraph = function(){
   var data =  [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
-{"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
+  {"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
   var r = document.getElementById("r").checked;
-  var d =document.getElementById("d").checked;
-  var n =document.getElementById("n").checked;
-  var subData=[]
+  var d = document.getElementById("d").checked;
+  var n = document.getElementById("n").checked;
+  var subData = []
   clearChart();
   if(r && d && n ){
     initialPie(data);
+    updatePie(data);
   }else if( r && d){
     for (var i = 0; i < data.length; i++) {
      var dict={}
