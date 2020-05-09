@@ -1,4 +1,3 @@
-var data;
 //var daysElapsed = document.getElementById("dateSlider").value;
 
 const getQuery = function() {
@@ -37,17 +36,19 @@ const slider = document.getElementById('dateSlider');
 const getData = function(daysElapsed) {
     //daysElapsed should be from 2020-01-21
     var query = getQuery();
+    var data;
     $.ajax({
         method: 'POST',
         url: '/data',
+        async: false,
         data: {'q': query, 'date': daysElapsed},
         success: function(retrieved) {
             var date = document.getElementById('dateSelected');
             date.innerHTML = formatDate(retrieved['date']);
-            data = retrieved['data'][0];
-            render();
+            data = retrieved['data'][0]
         }
     });
+    return data;
 };
 
 const update = function() {
