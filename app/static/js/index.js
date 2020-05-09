@@ -9,7 +9,7 @@ var updateBar1;
 
 
 var initialBar1 = function(data, l){
-  console.log(data);
+  // console.log(data);
   var margin = {top:50, right:50, bottom:50, left:50};
   //the total width of the bar graph
   var height = data.length*200-100;
@@ -43,7 +43,7 @@ var initialBar1 = function(data, l){
   yScale.domain(data.map(function(d) { return d.country; }));
   yAxis = d3.axisLeft(yScale);
 
-  xScale.domain([0, d3.max(data, function(d) { return d.option1+2; })]);
+  xScale.domain([0, d3.max(data, function(d) { return d.option1+ 20; })]);
   xAxis = d3.axisTop(xScale);
 
   //draws the actual bars and does the height based off of data values
@@ -86,7 +86,7 @@ var initialBar1 = function(data, l){
       .selectAll("text")
       // .attr("font-family", "Didot")
 
-  var legend = svgContainer.selectAll(".legend")
+  var legend = d3.select("#chartID").select("svg").selectAll(".legend")
       .data(data)
       .enter().append("g")
       .attr("class", "legend")
@@ -94,25 +94,25 @@ var initialBar1 = function(data, l){
 
   legend.append("circle")
       .attr("class", "option1")
-      .attr("cx", width)
-      .attr("cy", 20)
+      .attr("cx", width+90)
+      .attr("cy", 70)
       .attr("r", 10)
       .style("fill", "#E5C3D1");
 
   legend.append("text")
-      .attr("x", width - 95)
-      .attr("y", 25)
+      .attr("x", width)
+      .attr("y", 75)
       .text(""+ l[0] +"");
 
 
   updateBar1 = function(updatedData){
-    console.log("here");
-    console.log(updatedData);
+    // console.log("here");
+    // console.log(updatedData);
 
     yScale.domain(updatedData.map(function(d) { return d.country; }));
     yAxis = d3.axisLeft(yScale);
 
-    xScale.domain([0, d3.max(updatedData, function(d) { return d.option1+2; })]);
+    xScale.domain([0, d3.max(updatedData, function(d) { return d.option1+ 20; })]);
     xAxis = d3.axisTop(xScale);
 
     svgContainer.select(".xaxis")
@@ -185,7 +185,7 @@ var initialBar2 = function(data, l){
   // console.log(max2);
   findM = [max1, max2]
   //sets the scale of the xscale initially
-  xScale.domain([0, d3.max(findM) + 2]);
+  xScale.domain([0, d3.max(findM) + 20]);
   xAxis = d3.axisTop(xScale);
 
   yScale.domain(data.map(function(d) { return d.country; }));
@@ -249,7 +249,7 @@ var initialBar2 = function(data, l){
       .selectAll("text")
       // .attr("font-family", "Didot")
 
-  legend = svgContainer.selectAll(".legend")
+  legend = d3.select("#chartID").select("svg").selectAll(".legend")
       .data(data)
       .enter().append("g")
       .attr("class", "legend")
@@ -257,31 +257,31 @@ var initialBar2 = function(data, l){
 
   legend.append("circle")
       .attr("class", "option1")
-      .attr("cx", width)
-      .attr("cy", 20)
+      .attr("cx", width+90)
+      .attr("cy", 70)
       .attr("r", 10)
       .style("fill", "#E5C3D1");
 
   legend.append("text")
-      .attr("x", width - 95)
-      .attr("y", 25)
+      .attr("x", width)
+      .attr("y", 75)
       .text("" + l[0] + "");
 
   legend.append("circle")
       .attr("class", "option2")
-      .attr("cx", width)
-      .attr("cy", 50)
+      .attr("cx", width+90)
+      .attr("cy", 100)
       .attr("r", 10)
       .style("fill", "#CAA8F5");
 
   legend.append("text")
-      .attr("x", width - 95)
-      .attr("y", 55)
+      .attr("x", width)
+      .attr("y", 105)
       .text("" + l[1] + "");
 
   updateBar2 = function(updatedData){
-    console.log("here2");
-    console.log(updatedData);
+    // console.log("here2");
+    // console.log(updatedData);
 
     yScale.domain(updatedData.map(function(d) { return d.country; }));
     yAxis = d3.axisLeft(yScale);
@@ -292,7 +292,7 @@ var initialBar2 = function(data, l){
     // console.log(max2);
     findM = [max1, max2]
 
-    xScale.domain([0, d3.max(findM) + 2]);
+    xScale.domain([0, d3.max(findM) + 20]);
     xAxis = d3.axisTop(xScale);
 
     svgContainer.select(".xaxis")
@@ -517,7 +517,7 @@ var newGraph = function(){
 
 function updateBar(){
   num++;
-  console.log(num);
+  // console.log(num);
   var data = [{"location":"Canada", "cases":canadaN[num], "deaths":canadaD[num], "recovered":canadaR[num]},
   {"location":"China","cases":7,"deaths": 15, "recovered": 25},{"location":"France","cases":5,"deaths":20, "recovered": 8}]
   // console.log(data);
