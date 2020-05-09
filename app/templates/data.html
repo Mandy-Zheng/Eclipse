@@ -46,6 +46,9 @@
     text-anchor: middle;
     font-family: times;
   }
+  #update{
+    display: none;
+  }
 </style>
 {% endblock %}
 
@@ -87,6 +90,7 @@
           <p id="dateSelected">January 22, 2020</p>
         </div>
       </div>
+      <button type = "submit" class = "btn btn-outline-info" value = "sumbit" id = "update" onclick = "updateBar();"> Transition </button>
       <br>
       {% for state in states %}
       <div class="row" style = "margin-left: 5px; margin-right: 5px;">
