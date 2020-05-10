@@ -48,7 +48,7 @@ var initialBar1 = function(data, l){
       .attr("width", width+200)
       .attr("height",height+100)
       .append("g").attr("class", "container")
-      .attr("transform", "translate("+ 150 +","+ 50 +")");
+      .attr("transform", "translate("+ 130 +","+ 50 +")");
 
   //maps the countries to the domain of the y scale
   yScale.domain(data.map(function(d) { return d.country; }));
@@ -202,7 +202,7 @@ var initialBar2 = function(data, l){
       .attr("width", width+200)
       .attr("height",height+100)
       .append("g").attr("class", "container")
-      .attr("transform", "translate("+ 150 +","+ 50 +")");
+      .attr("transform", "translate("+ 130 +","+ 50 +")");
 
   //finding the new maximum data value
   max1 = d3.max(data, function(d) { return parseInt(d.option1); });
@@ -767,11 +767,14 @@ var next = function(){
     }
     updateBar2(subData);
   }else if(chartType=="bar2dn"){
-    var dict={}
-    dict.country=data[i].location;
-    dict.option1=data[i].deaths;
-    dict.option2=data[i].cases;
-    subData.push(dict);
+    for (var i = 0; i < data.length; i++) {
+      var dict={}
+      dict.country=data[i].location;
+      dict.option1=data[i].deaths;
+      dict.option2=data[i].cases;
+      subData.push(dict);
+    }
+    updateBar2(subData);
   }else if (chartType=="bar1d") {
     for (var i = 0; i < data.length; i++) {
      chartType="bar1n";
