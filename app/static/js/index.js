@@ -468,7 +468,11 @@ var initialPie =function(dada){
      var u = svg.selectAll("path")
        .data(data_ready);
 
-      // Build the pie chart, add fill, make arcs, add mouseover text, set style, and interpolate from previous data values
+     var div = d3.select("#pieID").append("div")
+       .attr("class", "tooltip")
+       .style("opacity", 0);
+
+     // Build the pie chart, add fill, make arcs, add mouseover text, set style, and interpolate from previous data values
       u
        .enter()
        .append('path')
