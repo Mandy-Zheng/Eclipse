@@ -7,6 +7,8 @@ var canadaD = [1, 2, 3, 4, 5, 6, 7, 8];
 var canadaR = [10, 20, 30, 40, 50, 60, 70, 80];
 var updateBar1;
 
+//defining the margin amounts of the chart
+var chartType="";
 
 var initialBar1 = function(data, l){
   // console.log(data);
@@ -467,20 +469,31 @@ var clearChart = function(){
   d3.selectAll("svg").remove();
 }
 
+const slider = document.getElementById('dateSlider');
+//slider.addEventListener('input', update);
+
+slider.value = 1;
+
 var newGraph = function(){
-  // num = 0;
+  // var data =  getData(slider.value);
+  // console.log(data);
+  num = 0;
   var data =  [{"location":"Canada", "cases":canadaN[num], "deaths":canadaD[num], "recovered":canadaR[num]},
 {"location":"China","cases":7,"deaths": 15, "recovered": 25},{"location":"France","cases":5,"deaths":20, "recovered": 8}]
-// console.log(data);
+  console.log(data);
+
   var d = document.getElementById("d").checked;
   var r = document.getElementById("r").checked;
   var n =document.getElementById("n").checked;
   var subData=[]
   var options=[]
   clearChart();
+  chartType="";
   if(r && d && n ){
+    chartType="pie";
     initialPie(data);
   }else if( d && r){
+    chartType="bar2dr";
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.country=data[i].location;
@@ -489,8 +502,11 @@ var newGraph = function(){
      subData.push(dict);
      options = ["Deaths", "Recoveries"];
     }
+    console.log("===========");
+    console.log(subData);
     initialBar2(subData, options);
   }else if( r && n){
+    chartType="bar2nr";
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.country=data[i].location;
@@ -501,6 +517,7 @@ var newGraph = function(){
     }
     initialBar2(subData, options);
   }else if( d && n){
+    chartType="bar2dn";
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.country=data[i].location;
@@ -512,6 +529,7 @@ var newGraph = function(){
     initialBar2(subData, options);
   }else if( r || d || n){
     if(r){
+      chartType="bar1r";
       for (var i = 0; i < data.length; i++) {
        var dict={}
        dict.country=data[i].location;
@@ -520,6 +538,7 @@ var newGraph = function(){
        options = ["Recoveries"];
       }
     }else if(d){
+      chartType="bar1d";
       for (var i = 0; i < data.length; i++) {
        var dict={}
        dict.country=data[i].location;
@@ -529,6 +548,7 @@ var newGraph = function(){
       }
     }else{
       for (var i = 0; i < data.length; i++) {
+       chartType="bar1n";
        var dict={}
        dict.country=data[i].location;
        dict.option1=data[i].cases;
@@ -617,11 +637,64 @@ function updateBar(){
 // initialBar2(data);
 
 //displaying date
-var daysElapsed = document.getElementById("dateSlider").value;
-
-var displayDate = function(daysElapsed) {
-  console.log(daysElapsed);
-}
+/*
+var update = function() {
+    var data = getData(slider.value);
+    var subData=[];
+    if (chartType=="pie"){
+      updatePie(data);
+    }else if(chartType=="bar2dr"){
+      for (var i = 0; i < data.length; i++) {
+       var dict={}
+       dict.country=data[i].country;
+       dict.option1=data[i].deaths;
+       dict.option2=data[i].recoveries;
+       subData.push(dict);
+      }
+      updateBar2(subData);
+    }else if(chartType=="bar2nr"){
+      var dict={}
+      dict.country=data[i].country;
+      dict.option1=data[i].cases;
+      dict.option2=data[i].recoveries;
+      subData.push(dict);
+     }
+     updateBar2(subData);
+    }else if(chartType=="bar2dn"){
+      var dict={}
+      dict.country=data[i].country;
+      dict.option1=data[i].deaths;
+      dict.option2=data[i].cases;
+      subData.push(dict);
+    }else if (chartType=="bar1d") {
+      for (var i = 0; i < data.length; i++) {
+       chartType="bar1n";
+       var dict={}
+       dict.country=data[i].country;
+       dict.option1=data[i].deaths;
+       subData.push(dict);
+      }
+      updateBar1(subData);
+    }else if (chartType=="bar1n") {
+      for (var i = 0; i < data.length; i++) {
+       chartType="bar1n";
+       var dict={}
+       dict.country=data[i].country;
+       dict.option1=data[i].cases;
+       subData.push(dict);
+      }
+      updateBar1(subData);
+    }else if (chartType=="bar1r") {
+      for (var i = 0; i < data.length; i++) {
+       chartType="bar1n";
+       var dict={}
+       dict.country=data[i].country;
+       dict.option1=data[i].recoveries;
+       subData.push(dict);
+      }
+      updateBar1(subData);
+    }
+}*/
 
 
 
