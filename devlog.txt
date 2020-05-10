@@ -296,3 +296,6 @@ amandaZ -- 2020-05-10 14:42
 
 junheeL -- 2020-05-10 14:51
       -countries with long names are now abbreviated
+
+amandaZ -- 2020-05-10 15:42
+      -restyled chart labels
