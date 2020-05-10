@@ -146,43 +146,147 @@ input[type="checkbox"]:checked + label.tick:after {
 {% block scripts %}
 <script>
   var allStates = document.querySelector("#allStates");
+
+  //checks if all states are checked or not
+  //if all states checked, allStates checkbox is checked. If not, allStates is not checked
+  var states = document.getElementsByClassName("form-check-input filled-in states");
+  var temp = '';
+  var count = 0;
+  for (var i=0; i<states.length; i++) {
+    temp = states[i];
+    temp.addEventListener('change', function(){
+      console.log(temp.value);
+      console.log(temp.checked);
+      if(temp.value == "on" && temp.checked == false){
+        count++;
+        console.log(count);
+        if(count == 56){
+          allStates.checked = true;
+          allStates.value = "on";
+        }else{
+          allStates.checked = false;
+          allStates.value = "off";
+        }
+      }else if (temp.value == "off" && temp.checked == true){
+        count--;
+        console.log(count);
+        if(count == 56){
+          allStates.checked = true;
+          allStates.value = "on";
+        }else{
+          allStates.checked = false;
+          allStates.value = "off";
+        }
+      }else if(temp.value == "on" && temp.checked == true){
+        count--;
+        console.log(count);
+        if(count == 56){
+          allStates.checked = true;
+          allStates.value = "on";
+        }else{
+          allStates.checked = false;
+          allStates.value = "off";
+        }
+      }else if (temp.value == "off" && temp.checked == false){
+        count++;
+        console.log(count);
+        if(count == 56){
+          allStates.checked = true;
+          allStates.value = "on";
+        }else{
+          allStates.checked = false;
+          allStates.value = "off";
+        }
+      }
+    })
+  };
+
+  //makes all states checked if allStates is checked, makes all states unchecked if alllStates is then unchecked
   allStates.addEventListener('change', function() {
     if (this.checked) {
+      count = 56;
+      console.log("alllStates" + count);
       var elements = document.getElementsByClassName("form-check-input filled-in states");
       var state = '';
       for (var i=0; i<elements.length; i++) {
         state = elements[i];
-        state.disabled = true;
+        state.checked = true;
+        state.value = "on";
+        console.log(state.value);
+        console.log(state.checked);
       }
     }
 
     if (!this.checked) {
+      count = 0;
+      console.log("alllStates" + count);
       var elements = document.getElementsByClassName("form-check-input filled-in states");
       var state = '';
       for (var i=0; i<elements.length; i++) {
         state = elements[i];
-        state.disabled = false;
+        state.checked = false;
+        state.value = "off";
+        console.log(state.value);
+        console.log(state.checked);
       }
     }
   });
 
   var allCountries = document.querySelector("#allCountries");
+
+  //checks if all countries are checked or not
+  //if all countries checked, allCountries checkbox is checked. If not, allCountries is not checked
+  var countries = document.getElementsByClassName("form-check-input filled-in countries");
+  var secondTemp = '';
+  var secondCount = 0;
+  for (var i=0; i<countries.length; i++) {
+    secondTemp = countries[i];
+    secondTemp.addEventListener('change', function(){
+      if(secondTemp.value == "on"){
+        secondCount--;
+        if(secondCount == 185){
+          allCountries.checked = true;
+          allCountries.value = "on";
+        }else{
+          allCountries.checked = false;
+          allCountries.value = "off";
+        }
+      }else if (secondTemp.value == "off"){
+        secondCount++;
+        if(secondCount == 185){
+          allCountries.checked = true;
+          allCountries.value = "on";
+        }else{
+          allCountries.checked = false;
+          allCountries.value = "off";
+        }
+      }
+    })
+  };
+
+  //makes all states checked if allStates is checked, makes all states unchecked if alllStates is then unchecked
   allCountries.addEventListener('change', function() {
     if (this.checked) {
+      secondCount = 185;
       var elements = document.getElementsByClassName("form-check-input filled-in countries");
-      var state = '';
+      var country = '';
       for (var i=0; i<elements.length; i++) {
-        state = elements[i];
-        state.disabled = true;
+        country = elements[i];
+        country.checked = true;
+        country.value = "on";
+        // console.log(country.checked);
       }
     }
 
     if (!this.checked) {
+      secondCount = 0;
       var elements = document.getElementsByClassName("form-check-input filled-in countries");
-      var state = '';
+      var country = '';
       for (var i=0; i<elements.length; i++) {
-        state = elements[i];
-        state.disabled = false;
+        country = elements[i];
+        country.checked = false;
+        country.value = "off";
+        // console.log(country.checked);
       }
     }
   });

@@ -48,7 +48,8 @@ var initialBar1 = function(data, l){
       .attr("width", width+200)
       .attr("height",height+100)
       .append("g").attr("class", "container")
-      .attr("transform", "translate("+ 130 +","+ 50 +")");
+      .attr("transform", "translate("+ 160 +","+ 50 +")");
+      // .attr("width", width-100);
 
   //maps the countries to the domain of the y scale
   yScale.domain(data.map(function(d) { return d.country; }));
@@ -114,14 +115,14 @@ var initialBar1 = function(data, l){
   //creates the circle for the legend
   legend.append("circle")
       .attr("class", "option1")
-      .attr("cx", width + 190)
-      .attr("cy", 70)
+      .attr("cx", width + 145)
+      .attr("cy",90)
       .attr("r", 10)
       .style("fill", "#E5C3D1");
 
   //creates the labeling for the legend
   legend.append("text")
-      .attr("x", width + 90)
+      .attr("x", width + 115)
       .attr("y", 75)
       .text(""+ l[0] +"");
 
@@ -202,7 +203,7 @@ var initialBar2 = function(data, l){
       .attr("width", width+200)
       .attr("height",height+100)
       .append("g").attr("class", "container")
-      .attr("transform", "translate("+ 130 +","+ 50 +")");
+      .attr("transform", "translate("+ 160 +","+ 50 +")");
 
   //finding the new maximum data value
   max1 = d3.max(data, function(d) { return parseInt(d.option1); });
@@ -293,29 +294,29 @@ var initialBar2 = function(data, l){
   //creates circle for option1 in the legend
   legend.append("circle")
       .attr("class", "option1")
-      .attr("cx", width+190)
-      .attr("cy", 70)
+      .attr("cx", width+145)
+      .attr("cy", 90)
       .attr("r", 10)
       .style("fill", "#E5C3D1");
 
   //creates the labeling for option1 in the legend
   legend.append("text")
-      .attr("x", width + 90)
+      .attr("x", width + 115)
       .attr("y", 75)
       .text("" + l[0] + "");
 
   //creates circle for option2 in the legend
   legend.append("circle")
       .attr("class", "option2")
-      .attr("cx", width+190)
-      .attr("cy", 100)
+      .attr("cx", width+145)
+      .attr("cy", 135)
       .attr("r", 10)
       .style("fill", "#CAA8F5");
 
   //creates the labeling for option2 in the legend
   legend.append("text")
-      .attr("x", width + 90)
-      .attr("y", 105)
+      .attr("x", width + 115)
+      .attr("y", 120)
       .text("" + l[1] + "");
 
   //function to update the double-bar bar graph
