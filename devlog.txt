@@ -229,3 +229,7 @@ tiffanyC -- 2020-05-09 00:25
       -fixed bugs for displaying single and double bar graphs
       -changed legend to circles
       -added offset to xScale for bar graphs
+
+tiffanyC -- 2020-05-09 20:29
+      -added titles to axes of bar graphs
+      -modified style of bar graph labels and titles
