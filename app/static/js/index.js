@@ -1,8 +1,3 @@
-//dummy data
-var num = 0;
-var canadaN = [5, 10, 15, 20, 25, 30, 35, 40];
-var canadaD = [1, 2, 3, 4, 5, 6, 7, 8];
-var canadaR = [10, 20, 30, 40, 50, 60, 70, 80];
 
 //empty vars used for nested function in initialBar1 and initialBar2
 var updateBar1;
@@ -26,9 +21,6 @@ function digits_count(n) {
 
 //function for creating and updating a single-bar bar graph
 var initialBar1 = function(data, l){
-  // console.log(data);
-  // console.log(data.length);
-
   //margins
   var margin = {top:50, right:50, bottom:50, left:50};
   //the total width of the bar graph
@@ -418,6 +410,95 @@ var initialBar2 = function(data, l){
   }
 
 }
+var updatePie;
+
+var initialPie =function(dada){
+  for (var i = 0; i < dada.length; i++) {
+var width = 450
+    height = 450
+    margin = 40
+
+// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+var radius = Math.min(width, height) / 2 - margin
+
+var local=d3.local();
+// append the svg object to the div called 'my_dataviz'
+var svg = d3.select("#pieID")
+  .append("div")
+    .attr("id","location"+i)
+    var element = document.createElement("h2");
+        element.appendChild(document.createTextNode(dada[i].location));
+        document.getElementById('location'+i).appendChild(element);
+
+var svg = svg.append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("id","pie"+i)
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+// create 2 data_set
+var arc = d3.arc()
+  .innerRadius(0)
+  .outerRadius(radius)
+
+// set the color scale
+var color = d3.scaleOrdinal()
+  .domain(["recovered","deaths","cases","empty"])
+  .range(["#E7298A","#2E294E","#59C9A5","#D3D3D3"]);
+
+// A function that create / updatePie the plot for a given variable:
+updatePie =function(data,num) {
+  if(data.cases+data.recovered+data.deaths ==0){
+    data.empty=1;
+  }
+  var pie = d3.pie()
+     .value(function(d) {
+       return d.value;
+     })
+     .sort(function(a, b) {
+       return d3.ascending(a.key, b.key);
+     }) // This make sure that group order remains the same in the pie chart
+   var data_ready = pie( d3.entries(data));
+   var svg = d3.select("g#pie"+num);
+   var u = svg.selectAll("path")
+     .data(data_ready);
+
+   // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+   u
+     .enter()
+     .append('path')
+     .attr("class","path"+num)
+     .each(function(d) {
+       local.set(this, d);
+     })
+     .merge(u)
+     .transition()
+     .duration(1000)
+     .attrTween('d', function(d) {
+       var i = d3.interpolate(local.get(this), d);
+       local.set(this, i(0));
+       return function(t) {
+         return arc(i(t));
+       };
+     })
+     .attr('fill', function(d) {
+       return (color(d.data.key))
+     })
+     .attr("stroke", "white")
+     .style("stroke-width", "2px")
+     .style("opacity", 1)
+
+   // remove the group that is not present anymore
+   u
+     .exit()
+     .remove()
+
+ }
+
+  updatePie(dada[i],i);
+}
+// Initialize the plot with the first dataset
+}
 
 var updateChart = function() {
     //getting new dataset based on slider value
@@ -486,87 +567,7 @@ var updateChart = function() {
     }
 }
 
-var updatePie;
 
-var initialPie =function(dada){
-  for (var i = 0; i < dada.length; i++) {
-var width = 450
-    height = 450
-    margin = 40
-
-// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-var radius = Math.min(width, height) / 2 - margin
-
-var local=d3.local();
-// append the svg object to the div called 'my_dataviz'
-var svg = d3.select("#pieID")
-  .append("svg")
-    .attr("id","pie"+i)
-    .attr("width", width)
-    .attr("height", height)
-  .append("g")
-    .attr("id","pie"+i)
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-// create 2 data_set
-var arc = d3.arc()
-  .innerRadius(0)
-  .outerRadius(radius)
-
-// set the color scale
-var color = d3.scaleOrdinal()
-  .domain(["recoveries","deaths","cases"])
-  .range(d3.schemeDark2);
-
-// A function that create / updatePie the plot for a given variable:
-updatePie =function(data,num) {
-  var pie = d3.pie()
-     .value(function(d) {
-       return d.value;
-     })
-     .sort(function(a, b) {
-       return d3.ascending(a.key, b.key);
-     }) // This make sure that group order remains the same in the pie chart
-   var data_ready = pie( d3.entries(data));
-   var svg = d3.select("g#pie"+num);
-   var u = svg.selectAll("path")
-     .data(data_ready);
-
-   // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-   u
-     .enter()
-     .append('path')
-     .attr("class","path"+num)
-     .each(function(d) {
-       local.set(this, d);
-     })
-     .merge(u)
-     .transition()
-     .duration(1000)
-     .attrTween('d', function(d) {
-       var i = d3.interpolate(local.get(this), d);
-       local.set(this, i(0));
-       return function(t) {
-         return arc(i(t));
-       };
-     })
-     .attr('fill', function(d) {
-       return (color(d.data.key))
-     })
-     .attr("stroke", "white")
-     .style("stroke-width", "2px")
-     .style("opacity", 1)
-
-   // remove the group that is not present anymore
-   u
-     .exit()
-     .remove()
-
- }
-
-  updatePie(dada[i],i);
-}
-// Initialize the plot with the first dataset
-}
 
 var clearChart = function(){
   d3.selectAll("svg").remove();
@@ -671,94 +672,104 @@ var newGraph = function(){
 
   //displays transition and stop buttons only when options are chosen
   var transition = document.getElementById('update');
+  var pause = document.getElementById('stop');
   if(r || d || n) {
     transition.style.display = "inline";
+    pause.style.display = "inline";
   }else {
     transition.style.display = "none";
+    pause.style.display = "none";
   }
+}
+
+var next = function(){
+  var slider = document.getElementById('dateSlider');
+  var data =  getData(slider.value);
+  var subData=[];
+  if (chartType=="pie"){
+    for (var i = 0; i < data.length; i++) {
+        updatePie(data[i],i);
+    }
+  }else if(chartType=="bar2dr"){
+    for (var i = 0; i < data.length; i++) {
+     var dict={}
+     dict.country=data[i].location;
+     dict.option1=data[i].deaths;
+     dict.option2=data[i].recovered;
+     subData.push(dict);
+    }
+    updateBar2(subData);
+  }else if(chartType=="bar2rn"){
+    for (var i = 0; i < data.length; i++) {
+      var dict={}
+      dict.country=data[i].location;
+      dict.option1=data[i].recovered;
+      dict.option2=data[i].cases;
+      subData.push(dict);
+    }
+    updateBar2(subData);
+  }else if(chartType=="bar2dn"){
+    var dict={}
+    dict.country=data[i].location;
+    dict.option1=data[i].deaths;
+    dict.option2=data[i].cases;
+    subData.push(dict);
+  }else if (chartType=="bar1d") {
+    for (var i = 0; i < data.length; i++) {
+     chartType="bar1n";
+     var dict={}
+     dict.country=data[i].location;
+     dict.option1=data[i].deaths;
+     subData.push(dict);
+    }
+    updateBar1(subData);
+  }else if (chartType=="bar1n") {
+    for (var i = 0; i < data.length; i++) {
+     chartType="bar1n";
+     var dict={}
+     dict.country=data[i].location;
+     dict.option1=data[i].cases;
+     subData.push(dict);
+    }
+    updateBar1(subData);
+  }else if (chartType=="bar1r") {
+    for (var i = 0; i < data.length; i++) {
+     chartType="bar1n";
+     var dict={}
+     dict.country=data[i].location;
+     dict.option1=data[i].recovered;
+     subData.push(dict);
+    }
+    updateBar1(subData);
+  }
+  if(slider.value==97){
+    slider.value=1;
+  }else{
+      slider.value = parseInt(slider.value)+1;
+  }
+}
+
+var start = false;
+var end;
+
+//starts the automatic transitioning
+var run = function(){
+  if(!start){
+    var slide = document.getElementById('dateSlider');
+    slide.style.display="none";
+    start = true;
+    end = setInterval(next, 1500);
+  }
+}
+
+//stops the automatic transitioning
+var stop = function(){
+  var slide = document.getElementById('dateSlider');
+  slide.style.display="inline";
+  start=false;
+  clearInterval(end);
 }
 
 var slider = document.getElementById('dateSlider');
 
 slider.value = 1;
-
-
-
-//displaying date          <button type="button" class="btn btn-warning" id="dateBtn">Tester Button</button>
-// var daysElapsed = document.getElementById("dateSlider").value;
-
-// var displayDate = function(daysElapsed) {
-//   console.log(daysElapsed);
-
-//   var month = '';
-//   var day;
-//   if (daysElapsed <= 10){
-//     month = "January";
-//     day = 21 + daysElapsed;
-//   } else if (daysElapsed <= 39) {
-//     month = "February";
-//     day = daysElapsed - 10;
-//   } else if (daysElapsed <= 70) {
-//     month = "March";
-//     day = daysElapsed - 39;
-//   } else if (daysElapsed <= 100) {
-//     month = "April";
-//     day = daysElapsed - 70;
-//   } else {
-//     month = "May";
-//     day = daysElapsed - 100;
-//   }getData(1);
-// var dateBtn = document.getElementById("dateBtn");
-// dateBtn.addEventListener("click", displayDate);
-// dateBtn.addEventListener("click", document.getElementById("dateSelected").innerHTML = "hi");
-
-/*      .selectAll("text");
-
-
-//pie chart code
-
-var pwidth = 250
-var pheight = 250
-var margin= 40
-
-var radius = Math.min(width, height) / 2 - margin
-var svg = d3.select("#pieID")
-.append("svg")
-.attr("width", width)
-.attr("height", height)
-.append("g")
-.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-
-// set the color scale
-var color = d3.scaleOrdinal()
-.domain([0, d3.max(data, function(d) { return d.cases+1; })])
-.range(d3.schemeDark2);
-
-var pie = d3.pie()
-.value(function(d) {return d.value; })
-.sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
-var data_ready = pie(d3.entries(data))
-
-// map to data
-var u = svg.selectAll("path")
-.data(data_ready)
-
-// Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-u
-.enter()
-.append('path')
-.merge(u)
-.transition()
-.duration(1000)
-.attr('d', d3.arc()
-.innerRadius(0)
-.outerRadius(radius)
-)
-.attr('fill', function(d){ return(color(d.cases)) })
-.attr("stroke", "white")
-.style("stroke-width", "2px")
-.style("opacity", 1)
-
-// A function that create / update the plot for a given variable:
-=======*/

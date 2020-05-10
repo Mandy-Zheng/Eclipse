@@ -49,6 +49,9 @@
   #update{
     display: none;
   }
+  #stop{
+    display: none;
+  }
 </style>
 {% endblock %}
 
@@ -90,18 +93,9 @@
           <p id="dateSelected">January 22, 2020</p>
         </div>
       </div>
-      <button type = "submit" class = "btn btn-outline-info" value = "sumbit" id = "update" onclick = "updateChart();"> Transition </button>
+      <button type = "submit" class = "btn btn-outline-info" value = "sumbit" id = "update" onclick = "run();"> Transition </button>
+      <button class = "btn btn-outline-info" value = "sumbit" id = "stop" onclick = "stop();"> Stop </button>
       <br>
-      {% for state in states %}
-      <div class="row" style = "margin-left: 5px; margin-right: 5px;">
-          <h2>{{state}}</h2> &nbsp;
-      </div>
-      {% endfor %}
-      {% for country in countries %}
-      <div class="row" style = "margin-left: 5px; margin-right: 5px;">
-          <h2>{{country}}</h2> &nbsp;
-      </div>
-      {% endfor %}
     </center>
       <div id="chartID"></div>
       <div id="pieID"></div>
