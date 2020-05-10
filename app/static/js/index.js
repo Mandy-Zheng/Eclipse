@@ -47,34 +47,34 @@ updatePie =function(data,num) {
    var u = svg.selectAll("path")
      .data(data_ready);
 
-     var div = d3.select("g#pie"+num).append("div")
+     var div = d3.select("body").append("div")
          .attr("class", "tooltip")
          .style("opacity", 0);
 
    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-   u
-     .enter()
-     .append('path')
-     .attr("class","path"+num)
-     .each(function(d) {
-       local.set(this, d);
-     })
-     .merge(u)
-     .transition()
-     .duration(1000)
-     .attrTween('d', function(d) {
-       var i = d3.interpolate(local.get(this), d);
-       local.set(this, i(0));
-       return function(t) {
-         return arc(i(t));
-       };
-     })
-     .attr('fill', function(d) {
-       return (color(d.data.key))
-     })
-     .attr("stroke", "white")
-     .style("stroke-width", "2px")
-     .style("opacity", 1)
+   // u
+   //   .enter()
+   //   .append('path')
+   //   .attr("class","path"+num)
+   //   .each(function(d) {
+   //     local.set(this, d);
+   //   })
+   //   .merge(u)
+   //   .transition()
+   //   .duration(1000)
+   //   .attrTween('d', function(d) {
+   //     var i = d3.interpolate(local.get(this), d);
+   //     local.set(this, i(0));
+   //     return function(t) {
+   //       return arc(i(t));
+   //     };
+   //   })
+   //   .attr('fill', function(d) {
+   //     return (color(d.data.key))
+   //   })
+   //   .attr("stroke", "white")
+   //   .style("stroke-width", "2px")
+   //   .style("opacity", 1);
 
    u
      .data(data_ready)
@@ -86,18 +86,16 @@ updatePie =function(data,num) {
           return color(d.data.key);
      })
      .attr('transform', 'translate(0, 0)')
-   .on('mouseover', function (d, i) {
+     .on('mouseover', function (d, i) {
           d3.select(this).transition()
                .duration('50')
                .attr('opacity', '.85');
           div.transition()
                .duration(50)
                .style("opacity", 1);
-          console.log(div);
           div.html(d.value)
                .style("left", (d3.event.pageX + 10) + "px")
                .style("top", (d3.event.pageY - 15) + "px");
-          console.log(d.value);
      })
      .on('mouseout', function (d, i) {
           d3.select(this).transition()
@@ -106,7 +104,26 @@ updatePie =function(data,num) {
           div.transition()
                .duration('50')
                .style("opacity", 0);
-     });
+     })
+     .each(function(d) {
+         local.set(this, d);
+       })
+     .merge(u)
+     .transition()
+     .duration(1000)
+     .attrTween('d', function(d) {
+         var i = d3.interpolate(local.get(this), d);
+         local.set(this, i(0));
+         return function(t) {
+           return arc(i(t));
+         };
+      })
+     .attr('fill', function(d) {
+        return (color(d.data.key))
+     })
+     .attr("stroke", "white")
+     .style("stroke-width", "2px")
+     .style("opacity", 1);
 
    // remove the group that is not present anymore
    u
@@ -121,7 +138,7 @@ updatePie =function(data,num) {
 }
 initialPie(data1);
 
-// for (var i = 0; i < data1.length; i++) {
+// for (var i = 0; i < data2.length; i++) {
 //   updatePie(data2[i],i);
 // }
 
