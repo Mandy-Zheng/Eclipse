@@ -13,17 +13,20 @@ var width = 450
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
 var radius = Math.min(width, height) / 2 - margin
 
+var local=d3.local();
 // append the svg object to the div called 'my_dataviz'
 var svg = d3.select("#pieID")
   .append("svg")
+    .attr("id","pie"+i)
     .attr("width", width)
     .attr("height", height)
-    .attr("id","svg"+i)
   .append("g")
+    .attr("id","pie"+i)
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-console.log(svg);
 // create 2 data_set
-
+var arc = d3.arc()
+  .innerRadius(0)
+  .outerRadius(radius)
 
 // set the color scale
 var color = d3.scaleOrdinal()
@@ -32,43 +35,52 @@ var color = d3.scaleOrdinal()
 
 // A function that create / updatePie the plot for a given variable:
 updatePie =function(data,num) {
-  console.log("whaaaaaaaaaaaaat");
-  console.log(svg);
-  var svg=d3.select("#svg"+num).select("g");
-  // Compute the position of each group on the pie:
   var pie = d3.pie()
-    .value(function(d) {return d.value; })
-    .sort(function(a, b) { return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
-  var data_ready = pie(d3.entries(data))
-  console.log("3333");
-  console.log(svg);
-  // map to data
-  var u = svg.selectAll("path")
-    .data(data_ready)
-  // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-  u
-    .enter()
-    .append('path')
-    .merge(u)
-    .transition()
-    .duration(1000)
-    .attr('d', d3.arc()
-      .innerRadius(0)
-      .outerRadius(radius)
-    )
-    .attr('fill', function(d){ return(color(d.data.key)) })
-    .attr("stroke", "white")
-    .style("stroke-width", "2px")
-    .style("opacity", 1)
+     .value(function(d) {
+       return d.value;
+     })
+     .sort(function(a, b) {
+       return d3.ascending(a.key, b.key);
+     }) // This make sure that group order remains the same in the pie chart
+   var data_ready = pie( d3.entries(data));
+   var svg = d3.select("g#pie"+num);
+   var u = svg.selectAll("path")
+     .data(data_ready);
 
-  // remove the group that is not present anymore
-  u
-    .exit()
-    .remove()
+   // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+   u
+     .enter()
+     .append('path')
+     .attr("class","path"+num)
+     .each(function(d) {
+       local.set(this, d);
+     })
+     .merge(u)
+     .transition()
+     .duration(1000)
+     .attrTween('d', function(d) {
+       var i = d3.interpolate(local.get(this), d);
+       local.set(this, i(0));
+       return function(t) {
+         return arc(i(t));
+       };
+     })
+     .attr('fill', function(d) {
+       return (color(d.data.key))
+     })
+     .attr("stroke", "white")
+     .style("stroke-width", "2px")
+     .style("opacity", 1)
 
-}
+   // remove the group that is not present anymore
+   u
+     .exit()
+     .remove()
+
+ }
+
   updatePie(dada[i],i);
-// Initialize the plot with the first dataset
 }
+// Initialize the plot with the first dataset
 }
 initialPie(data1);
