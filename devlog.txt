@@ -291,5 +291,8 @@ junheeL -- 2020-05-10 08:45
 junheeL -- 2020-05-10 14:25
       -states' names are now not abbreviated
 
-amandaZ -- 2020-05-10 14:54
+amandaZ -- 2020-05-10 14:42
       -fixed rerendering pie chart data
+
+junheeL -- 2020-05-10 14:51
+      -countries with long names are now abbreviated
