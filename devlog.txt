@@ -240,3 +240,6 @@ tiffanyC -- 2020-05-09 20:29
 tiffanyC -- 2020-05-09 23:33
       -fixed bugs for double and single bar graphs
       -finished obtaining data for countries and matched it with the slider
+
+junheeL -- 2020-05-10 08:24
+      -fixed a bug that caused countries with multiple states/provinces to return multiple datasets

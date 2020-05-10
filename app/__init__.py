@@ -106,12 +106,31 @@ def displayData():
 
 @app.route('/data', methods=['POST'])
 def getData():
-    c, s = decode(request.form['q'])
-    s = [abbrev[state] for state in s]
-    print(s)
+    cList, sList = decode(request.form['q'])
+    sList = [abbrev[state] for state in sList]
     day = date.fromisoformat('2020-01-21') + timedelta(days=int(request.form['date']))
-    c = [format(row) for row in countries if row[0] == day and row[1] in c]
-    s = [format(row, True) for row in states if row[0] == day and row[1] in s]
+    c = [format(row) for row in countries if row[0] == day and row[1] in cList]
+    for country in ['Australia', 'Canada', 'China', 'Denmark', 'France', 'Netherlands', 'United Kingdom']:
+        if country in cList:
+            temp = [data for data in c if data['location'] == country]
+            new = {'location': country, 'cases': 0, 'recovered': 0, 'deaths': 0} 
+            for entry in temp:
+                c.remove(entry)
+                print(entry)
+                try:
+                    new['cases'] += int(entry['cases'])
+                except ValueError:
+                    pass
+                try:
+                    new['recovered'] += int(entry['recovered'])
+                except ValueError:
+                    pass
+                try:
+                    new['deaths'] += int(entry['deaths'])
+                except ValueError:
+                    pass
+            c.append(new)
+    s = [format(row, True) for row in states if row[0] == day and row[1] in sList]
     print(s)
     return {'date': day.isoformat(), 'data': c + s}
 
