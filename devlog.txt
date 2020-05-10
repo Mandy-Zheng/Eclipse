@@ -300,7 +300,11 @@ junheeL -- 2020-05-10 14:51
 amandaZ -- 2020-05-10 15:42
       -restyled chart labels
 
-amandaZ -- 2020-05-10 156:39
+amandaZ -- 2020-05-10 16:39
       -updated README
       -updated design doc
       -fixed render button no query issue
+
+amandaZ -- 2020-05-10 17:30
+      -updated README about Safari issue
+      -fix pop up stuff
