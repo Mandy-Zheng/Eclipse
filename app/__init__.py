@@ -130,14 +130,14 @@ def format(data, state=False):
     print(data)
     if state:
         return {
-            'location': full(data[1]),
+            'location': lineBreak(full(data[1])),
             'cases': data[2] if data[2] != '' else 0,
             'recovered': data[11] if data[11] != '' else 0,
             'deaths': data[14] if data[14] != '' else 0
             }
     else:
         return {
-            'location': data[1], 
+            'location': lineBreak(data[1]), 
             'cases': data[5] if data[5] != '' else 0, 
             'recovered': data[6] if data[6] != '' else 0, 
             'deaths': data[7] if data[7] != '' else 0
@@ -145,6 +145,13 @@ def format(data, state=False):
 
 def full(short):
     return [name for name in abbrev.keys() if abbrev[name] == short][0]
+
+def lineBreak(name):
+    if len(name) > 12:
+        l = name.split()
+        if len(l) > 1:
+            return '. '.join([word[0] for word in l])
+    return name
 
 if __name__ == "__main__":
     app.debug = True
