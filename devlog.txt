@@ -243,3 +243,6 @@ tiffanyC -- 2020-05-09 23:33
 
 junheeL -- 2020-05-10 08:24
       -fixed a bug that caused countries with multiple states/provinces to return multiple datasets
+
+junheeL -- 2020-05-10 08:45
+      -fixed a bug that caused state data not to show up

@@ -116,30 +116,33 @@ def getData():
             new = {'location': country, 'cases': 0, 'recovered': 0, 'deaths': 0} 
             for entry in temp:
                 c.remove(entry)
-                print(entry)
-                try:
-                    new['cases'] += int(entry['cases'])
-                except ValueError:
-                    pass
-                try:
-                    new['recovered'] += int(entry['recovered'])
-                except ValueError:
-                    pass
-                try:
-                    new['deaths'] += int(entry['deaths'])
-                except ValueError:
-                    pass
+                new['cases'] += int(entry['cases'])
+                new['recovered'] += int(entry['recovered'])
+                new['deaths'] += int(entry['deaths'])
             c.append(new)
     s = [format(row, True) for row in states if row[0] == day and row[1] in sList]
+    for state in sList:
+        if state not in [entry['location'] for entry in s]:
+            s.append({'location': state, 'cases': 0, 'recovered': 0, 'deaths': 0})
     print(s)
     return {'date': day.isoformat(), 'data': c + s}
 
 def format(data, state=False):
     print(data)
     if state:
-        return {'location': data[1], 'cases': data[2], 'recovered': data[11], 'deaths': data[14]}
+        return {
+            'location': data[1],
+            'cases': data[2] if data[2] != '' else 0,
+            'recovered': data[11] if data[11] != '' else 0,
+            'deaths': data[14] if data[14] != '' else 0
+            }
     else:
-        return {'location': data[1], 'cases': data[5], 'recovered': data[6], 'deaths': data[7]}
+        return {
+            'location': data[1], 
+            'cases': data[5] if data[5] != '' else 0, 
+            'recovered': data[6] if data[6] != '' else 0, 
+            'deaths': data[7] if data[7] != '' else 0
+            }
 
 if __name__ == "__main__":
     app.debug = True
