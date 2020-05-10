@@ -1,11 +1,23 @@
 var num = 0;
-var canadaN = [5, 10, 15, 20, 25, 30, 35, 40]
+var canadaN = [5, 10, 15, 20, 25, 30, 35, 40];
 var canadaD = [1, 2, 3, 4, 5, 6, 7, 8];
 var canadaR = [10, 20, 30, 40, 50, 60, 70, 80];
 var updateBar1;
 
 //defining the margin amounts of the chart
 var chartType="";
+
+function digits_count(n) {
+  var count = 0;
+  if (n >= 1) ++count;
+
+  while (n / 10 >= 1) {
+    n /= 10;
+    ++count;
+  }
+
+  return count;
+};
 
 var initialBar1 = function(data, l){
   // console.log(data);
@@ -14,6 +26,7 @@ var initialBar1 = function(data, l){
   var height = data.length*200-100;
   //the total height of the bar graph
   var width = 1200-100;
+
 
 
   //sets the number of pixels for the yscale
@@ -42,7 +55,7 @@ var initialBar1 = function(data, l){
   yScale.domain(data.map(function(d) { return d.country; }));
   yAxis = d3.axisLeft(yScale);
 
-  xScale.domain([0, d3.max(data, function(d) { return d.option1+ 20; })]);
+  xScale.domain([0, d3.max(data, function(d) { return parseInt(d.option1) + Math.pow(10, digits_count(parseInt(d.option1)) - 1); })]);
   xAxis = d3.axisTop(xScale);
 
   //draws the actual bars and does the height based off of data values
@@ -66,7 +79,7 @@ var initialBar1 = function(data, l){
   labeling.append("text")
       .attr("class","label")
       .attr("y", (function(d) { return yScale(d.country) + yScale.bandwidth()/2; }  ))
-      .attr("x", function(d) { return  xScale(d.option1) + 10; })
+      .attr("x", function(d) { return  xScale(d.option1) + 15; })
       .attr("dx", ".75em")
       .text(function(d) { return d.option1; });
 
@@ -121,13 +134,13 @@ var initialBar1 = function(data, l){
 
 
   updateBar1 = function(updatedData){
-    // console.log("here");
+    // console.log("updating");
     // console.log(updatedData);
 
     yScale.domain(updatedData.map(function(d) { return d.country; }));
     yAxis = d3.axisLeft(yScale);
 
-    xScale.domain([0, d3.max(updatedData, function(d) { return d.option1+ 20; })]);
+    xScale.domain([0, d3.max(updatedData, function(d) { return parseInt(d.option1) + Math.pow(10, digits_count(parseInt(d.option1)) - 1); })]);
     xAxis = d3.axisTop(xScale);
 
     svgContainer.select(".xaxis")
@@ -142,22 +155,25 @@ var initialBar1 = function(data, l){
           .duration(1000)
           .attr("width", function() { testing++; return xScale(updatedData[testing].option1); });
           // .attr("y", function(d) { return yScale(d.cases); })
-
     testing = -1;
+
     var testing2 = -1;
+    var testing3 = -1;
   //resets the number labels and transitioning the previous numbers to the new data numbers
     svgContainer.selectAll(".label")
         .transition()
         .duration(1000)
         .tween( 'text', function() {
-          testing++;
+          testing2++;
           var currentValue = this.textContent || "0";
-          var interpolator = d3.interpolateRound( currentValue, updatedData[testing].option1);
+          var interpolator = d3.interpolateRound( currentValue, updatedData[testing2].option1);
           return function( t ) {
             this.textContent = interpolator( t );
           };})
-        .attr("x", function() { testing2++; return xScale(updatedData[testing2].option1) + 10; })
+        .attr("x", function() { testing3++; return xScale(updatedData[testing3].option1) + 15; })
         //.attr("x", (function(d) { return xScale(d.country) + xScale.bandwidth() / 2 ; }  ));
+    testing2 = -1;
+    testing3 = -1;
   }
 
 }
@@ -194,13 +210,13 @@ var initialBar2 = function(data, l){
       .append("g").attr("class", "container")
       .attr("transform", "translate("+ 100 +","+ 50 +")");
   // height = 3*200-100;
-  max1 = d3.max(data, function(d) { return d.option1; });
-  max2 = d3.max(data, function(d) { return d.option2; });
+  max1 = d3.max(data, function(d) { return parseInt(d.option1); });
+  max2 = d3.max(data, function(d) { return parseInt(d.option2); });
   // console.log(max1);
   // console.log(max2);
   findM = [max1, max2]
   //sets the scale of the xscale initially
-  xScale.domain([0, d3.max(findM) + 20]);
+  xScale.domain([0, parseInt(d3.max(findM)) + Math.pow(10, digits_count(parseInt(d3.max(findM))) - 1) ]);
   xAxis = d3.axisTop(xScale);
 
   yScale.domain(data.map(function(d) { return d.country; }));
@@ -237,7 +253,7 @@ var initialBar2 = function(data, l){
       .attr("class","label")
       .attr("class", "first")
       .attr("y", (function(d) { return yScale(d.country) + yScale.bandwidth() / 4 ; }  ))
-      .attr("x", function(d) { return  xScale(d.option1) + 10; })
+      .attr("x", function(d) { return  xScale(d.option1) + 15; })
       .attr("dx", ".75em")
       .text(function(d) { return d.option1; });
 
@@ -246,7 +262,7 @@ var initialBar2 = function(data, l){
       .attr("class", "label")
       .attr("class", "second")
       .attr("y", (function(d) { return yScale(d.country) + ((yScale.bandwidth() / 4) * 3) ; } ))
-      .attr("x", function(d) { return xScale(d.option2) + 10; })
+      .attr("x", function(d) { return xScale(d.option2) + 15; })
       .attr("dx", ".75em")
       .text(function(d) {return  d.option2;})
 
@@ -317,13 +333,13 @@ var initialBar2 = function(data, l){
     yScale.domain(updatedData.map(function(d) { return d.country; }));
     yAxis = d3.axisLeft(yScale);
 
-    max1 = d3.max(updatedData, function(d) { return d.option1; });
-    max2 = d3.max(updatedData, function(d) { return d.option2; });
+    max1 = d3.max(updatedData, function(d) { return parseInt(d.option1); });
+    max2 = d3.max(updatedData, function(d) { return parseInt(d.option2); });
     // console.log(max1);
     // console.log(max2);
     findM = [max1, max2]
 
-    xScale.domain([0, d3.max(findM) + 20]);
+    xScale.domain([0, parseInt(d3.max(findM)) + Math.pow(10, digits_count(parseInt(d3.max(findM))) - 1) ]);
     xAxis = d3.axisTop(xScale);
 
     svgContainer.select(".xaxis")
@@ -362,7 +378,7 @@ var initialBar2 = function(data, l){
           return function( t ) {
             this.textContent = interpolator( t );
           };})
-        .attr("x", function() { testing2++; return xScale(updatedData[testing2].option1) + 10; })
+        .attr("x", function() { testing2++; return xScale(updatedData[testing2].option1) + 15; })
         //.attr("x", (function(d) { return xScale(d.country) + xScale.bandwidth() / 2 ; }  ));
 
     var label1 = -1;
@@ -380,13 +396,14 @@ var initialBar2 = function(data, l){
           return function( t ) {
             this.textContent = interpolator( t );
           };})
-        .attr("x", function() { label2++; return xScale(updatedData[label2].option2) + 10; })
+        .attr("x", function() { label2++; return xScale(updatedData[label2].option2) + 15; })
   }
 
 }
 
 var updateChart = function() {
     var data = getData(slider.value);
+    // console.log(data);
     var subData=[];
     if (chartType=="pie"){
       for (var i = 0; i < data.length; i++) {
@@ -411,11 +428,14 @@ var updateChart = function() {
       }
       updateBar2(subData);
     }else if(chartType=="bar2dn"){
-      var dict={}
-      dict.country=data[i].location;
-      dict.option1=data[i].deaths;
-      dict.option2=data[i].cases;
-      subData.push(dict);
+      for (var i = 0; i < data.length; i++) {
+        var dict={}
+        dict.country=data[i].location;
+        dict.option1=data[i].deaths;
+        dict.option2=data[i].cases;
+        subData.push(dict);
+      }
+      updateBar2(subData);
     }else if (chartType=="bar1d") {
       for (var i = 0; i < data.length; i++) {
        chartType="bar1n";
@@ -442,6 +462,8 @@ var updateChart = function() {
        dict.option1=data[i].recovered;
        subData.push(dict);
       }
+      // console.log("SUBDATA");
+      // console.log(subData);
       updateBar1(subData);
     }
 }
@@ -533,13 +555,14 @@ var clearChart = function(){
 }
 
 var newGraph = function(){
-  console.log(slider.value);
+  // console.log("here");
+  // console.log(slider.value);
   var data =  getData(slider.value);
   num = 0;
   /*var data =  [{"location":"Canada", "cases":canadaN[num], "deaths":canadaD[num], "recovered":canadaR[num]},
 {"location":"China","cases":7,"deaths": 15, "recovered": 25},{"location":"France","cases":5,"deaths":20, "recovered": 8}]
   console.log(data);*/
-  console.log(data);
+  // console.log(data);
   var d = document.getElementById("d").checked;
   var r = document.getElementById("r").checked;
   var n =document.getElementById("n").checked;
