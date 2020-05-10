@@ -491,8 +491,8 @@ var initialPie =function(dada){
                    .duration(10)
                    .style("opacity", 1);
               div.html("N/A")
-                   .style("top", d3.event.clientY+"px")
-                   .style("left",(d3.event.clientX)+50+"px");
+                   .style("top", d3.event.pageY+"px")
+                   .style("left",d3.event.pageX+"px");
             }else{
               d3.select(this).transition()
                    .duration('50')
@@ -501,8 +501,8 @@ var initialPie =function(dada){
                    .duration(10)
                    .style("opacity", 1);
               div.html(d.data.key + ": " + d.value)
-                   .style("top", d3.event.clientY+"px")
-                   .style("left",(d3.event.clientX)+50+"px");
+                   .style("top", d3.event.pageY+"px")
+                   .style("left",d3.event.pageX+"px");
             }
        })
        .on('mouseout', function (d, i) {
