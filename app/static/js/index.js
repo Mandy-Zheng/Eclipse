@@ -14,7 +14,7 @@ var initialBar1 = function(data, l){
   //the total width of the bar graph
   var height = data.length*200-100;
   //the total height of the bar graph
-  var width = 800-100;
+  var width = 1200-100;
 
 
   //sets the number of pixels for the yscale
@@ -35,10 +35,10 @@ var initialBar1 = function(data, l){
 
   //makes a chart with width and height adjusted with margins
   var svgContainer = d3.select("#chartID").append("svg")
-      .attr("width", width+100)
+      .attr("width", width+200)
       .attr("height",height+100)
       .append("g").attr("class", "container")
-      .attr("transform", "translate("+ 50 +","+ 50 +")");
+      .attr("transform", "translate("+ 100 +","+ 50 +")");
 
   yScale.domain(data.map(function(d) { return d.country; }));
   yAxis = d3.axisLeft(yScale);
@@ -79,12 +79,28 @@ var initialBar1 = function(data, l){
       .selectAll("text")
       // .attr("font-family", "Didot")
 
+  //title for x axis
+  svgContainer.append("text")
+      .attr("x", width/2)
+      .attr("y", -35)
+      .style("text-anchor", "middle")
+      .text("Value");
+
   //creates labels for y scale on the side
   svgContainer.append("g")
       .attr("class", "yaxis")
       .call(yAxis)
       .selectAll("text")
       // .attr("font-family", "Didot")
+
+  //title for y axis
+  svgContainer.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - 100)
+      .attr("x", 0 - height/2)
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Country/State");
 
   var legend = d3.select("#chartID").select("svg").selectAll(".legend")
       .data(data)
@@ -94,13 +110,13 @@ var initialBar1 = function(data, l){
 
   legend.append("circle")
       .attr("class", "option1")
-      .attr("cx", width+90)
+      .attr("cx", width + 160)
       .attr("cy", 70)
       .attr("r", 10)
       .style("fill", "#E5C3D1");
 
   legend.append("text")
-      .attr("x", width)
+      .attr("x", width + 60)
       .attr("y", 75)
       .text(""+ l[0] +"");
 
@@ -153,7 +169,7 @@ var initialBar2 = function(data, l){
   //the total width of the bar graph
   var height = data.length*200-100;
   //the total height of the bar graph
-  var width = 800-100;
+  var width = 1200-100;
 
 
   //sets the number of pixels for the yscale
@@ -174,10 +190,10 @@ var initialBar2 = function(data, l){
 
   //makes a chart with width and height adjusted with margins
   var svgContainer = d3.select("#chartID").append("svg")
-      .attr("width", width+100)
+      .attr("width", width+200)
       .attr("height",height+100)
       .append("g").attr("class", "container")
-      .attr("transform", "translate("+ 50 +","+ 50 +")");
+      .attr("transform", "translate("+ 100 +","+ 50 +")");
   // height = 3*200-100;
   max1 = d3.max(data, function(d) { return d.option1; });
   max2 = d3.max(data, function(d) { return d.option2; });
@@ -242,12 +258,28 @@ var initialBar2 = function(data, l){
       .selectAll("text")
       // .attr("font-family", "Didot")
 
+  //title for x axis
+  svgContainer.append("text")
+      .attr("x", width/2)
+      .attr("y", -35)
+      .style("text-anchor", "middle")
+      .text("Value");
+
   //creates labels for y scale on the left
   svgContainer.append("g")
       .attr("class", "yaxis")
       .call(yAxis)
       .selectAll("text")
       // .attr("font-family", "Didot")
+
+  //title for y axis
+  svgContainer.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - 100)
+      .attr("x", 0 - height/2)
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Country/State");
 
   legend = d3.select("#chartID").select("svg").selectAll(".legend")
       .data(data)
@@ -257,25 +289,25 @@ var initialBar2 = function(data, l){
 
   legend.append("circle")
       .attr("class", "option1")
-      .attr("cx", width+90)
+      .attr("cx", width+160)
       .attr("cy", 70)
       .attr("r", 10)
       .style("fill", "#E5C3D1");
 
   legend.append("text")
-      .attr("x", width)
+      .attr("x", width + 60)
       .attr("y", 75)
       .text("" + l[0] + "");
 
   legend.append("circle")
       .attr("class", "option2")
-      .attr("cx", width+90)
+      .attr("cx", width+160)
       .attr("cy", 100)
       .attr("r", 10)
       .style("fill", "#CAA8F5");
 
   legend.append("text")
-      .attr("x", width)
+      .attr("x", width + 60)
       .attr("y", 105)
       .text("" + l[1] + "");
 
