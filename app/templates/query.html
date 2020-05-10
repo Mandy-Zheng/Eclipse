@@ -42,6 +42,7 @@ input[type="checkbox"]:checked + label.tick:after {
   <br>
   <center>
     <h1>Data Selection</h1>
+    <h3 style = "color: #FF0000;">{{error}}<h3>
   </center>
   <h3 style = "color: #A882DD;">Please select the data you want to be displayed.</h3>
   <br>
@@ -135,7 +136,7 @@ input[type="checkbox"]:checked + label.tick:after {
   </div>
   <br>
   <center>
-      <button type = "submit" class = "btn btn-outline-info" value = "sumbit" disabled> Render </button>
+      <button type = "submit" class = "btn btn-outline-info" value = "sumbit"> Render </button>
   </center>
 </form>
 <br><br>
@@ -185,5 +186,6 @@ input[type="checkbox"]:checked + label.tick:after {
       }
     }
   });
+
 </script>
 {% endblock %}

@@ -102,6 +102,10 @@ def decode(argstr):
 @app.route('/data', methods=['GET'])
 def displayData():
     dataRequestC, dataRequestS = decode(request.args['q'])
+    if(len(dataRequestC) == 0 and len(dataRequestS) == 0 ):
+        statesList=abbrev.keys()
+        error='Please Select at least One Location'
+        return render_template("query.html", title="COVID-19 Tracker", states=statesList, countries=countries, state_dict=abbrev, countriesList=countriesList,error=error)
     return render_template("data.html", states=dataRequestS, countries=dataRequestC)
 
 @app.route('/data', methods=['POST'])
@@ -123,7 +127,6 @@ def getData():
     for state in sList:
         if state not in [entry['location'] for entry in s]:
             s.append({'location': state, 'cases': 0, 'recovered': 0, 'deaths': 0})
-    print(s)
     return {'date': day.isoformat(), 'data': c + s}
 
 def format(data, state=False):
