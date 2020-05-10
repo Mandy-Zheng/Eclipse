@@ -469,7 +469,11 @@ var initialPie =function(dada){
      var u = svg.selectAll("path")
        .data(data_ready);
 
-      // Build the pie chart, add fill, make arcs, add mouseover text, set style, and interpolate from previous data values
+     var div = d3.select("#pieID").append("div")
+       .attr("class", "tooltip")
+       .style("opacity", 0);
+
+     // Build the pie chart, add fill, make arcs, add mouseover text, set style, and interpolate from previous data values
       u
        .enter()
        .append('path')
@@ -485,21 +489,21 @@ var initialPie =function(dada){
                    .duration('50')
                    .attr('opacity', '.85');
               div.transition()
-                   .duration(25)
+                   .duration(10)
                    .style("opacity", 1);
               div.html("N/A")
-                   .style("top", (d3.event.clientY)+300+"px")
-                   .style("left",(d3.event.clientX)+"px");
+                   .style("top", d3.event.pageY+"px")
+                   .style("left",d3.event.pageX+"px");
             }else{
               d3.select(this).transition()
                    .duration('50')
                    .attr('opacity', '.85');
               div.transition()
-                   .duration(25)
+                   .duration(10)
                    .style("opacity", 1);
               div.html(d.data.key + ": " + d.value)
-                   .style("top", (d3.event.clientY)+300+"px")
-                   .style("left",(d3.event.clientX)+"px");
+                   .style("top", d3.event.pageY+"px")
+                   .style("left",d3.event.pageX+"px");
             }
        })
        .on('mouseout', function (d, i) {
