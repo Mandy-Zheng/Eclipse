@@ -18,6 +18,30 @@ function digits_count(n) {
   return count;
 };
 
+function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
+
 //function for creating and updating a single-bar bar graph
 var initialBar1 = function(data, l){
   //margins
@@ -48,7 +72,7 @@ var initialBar1 = function(data, l){
       .attr("width", width+200)
       .attr("height",height+100)
       .append("g").attr("class", "container")
-      .attr("transform", "translate("+ 130 +","+ 50 +")");
+      .attr("transform", "translate("+ 150 +","+ 50 +")");
 
   //maps the countries to the domain of the y scale
   yScale.domain(data.map(function(d) { return d.country; }));
@@ -104,14 +128,6 @@ var initialBar1 = function(data, l){
       .call(yAxis)
       .selectAll("text")
 
-  //creates title for y axis
-  svgContainer.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - 100)
-      .attr("x", 0 - height/2)
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Country/State");
 
   //creates the legend and enters the data values
   var legend = d3.select("#chartID").select("svg").selectAll(".legend")
@@ -210,7 +226,7 @@ var initialBar2 = function(data, l){
       .attr("width", width+200)
       .attr("height",height+100)
       .append("g").attr("class", "container")
-      .attr("transform", "translate("+ 130 +","+ 50 +")");
+      .attr("transform", "translate("+ 150 +","+ 50 +")");
 
   //finding the new maximum data value
   max1 = d3.max(data, function(d) { return parseInt(d.option1); });
@@ -291,14 +307,6 @@ var initialBar2 = function(data, l){
       .selectAll("text")
       // .attr("font-family", "Didot")
 
-  //creates title for y axis
-  svgContainer.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - 100)
-      .attr("x", 0 - height/2)
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Country/State");
 
   //creates the legend and enters the data values
   legend = d3.select("#chartID").select("svg").selectAll(".legend")

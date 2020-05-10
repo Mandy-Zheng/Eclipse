@@ -112,7 +112,7 @@ def getData():
     for country in ['Australia', 'Canada', 'China', 'Denmark', 'France', 'Netherlands', 'United Kingdom']:
         if country in cList:
             temp = [data for data in c if data['location'] == country]
-            new = {'location': country, 'cases': 0, 'recovered': 0, 'deaths': 0} 
+            new = {'location': country, 'cases': 0, 'recovered': 0, 'deaths': 0}
             for entry in temp:
                 c.remove(entry)
                 new['cases'] += int(entry['cases'])
@@ -127,7 +127,6 @@ def getData():
     return {'date': day.isoformat(), 'data': c + s}
 
 def format(data, state=False):
-    print(data)
     if state:
         return {
             'location': lineBreak(full(data[1])),
@@ -137,9 +136,9 @@ def format(data, state=False):
             }
     else:
         return {
-            'location': lineBreak(data[1]), 
-            'cases': data[5] if data[5] != '' else 0, 
-            'recovered': data[6] if data[6] != '' else 0, 
+            'location': lineBreak(data[1]),
+            'cases': data[5] if data[5] != '' else 0,
+            'recovered': data[6] if data[6] != '' else 0,
             'deaths': data[7] if data[7] != '' else 0
             }
 
