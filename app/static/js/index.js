@@ -18,30 +18,6 @@ function digits_count(n) {
   return count;
 };
 
-function wrap(text, width) {
-  text.each(function() {
-    var text = d3.select(this),
-        words = text.text().split(/\s+/).reverse(),
-        word,
-        line = [],
-        lineNumber = 0,
-        lineHeight = 1.1, // ems
-        y = text.attr("y"),
-        dy = parseFloat(text.attr("dy")),
-        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-    while (word = words.pop()) {
-      line.push(word);
-      tspan.text(line.join(" "));
-      if (tspan.node().getComputedTextLength() > width) {
-        line.pop();
-        tspan.text(line.join(" "));
-        line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-      }
-    }
-  });
-}
-
 //function for creating and updating a single-bar bar graph
 var initialBar1 = function(data, l){
   //margins
@@ -488,8 +464,11 @@ var initialPie =function(dada){
      var u = svg.selectAll("path")
        .data(data_ready);
 
-     // Build the pie chart, add fill, make arcs, add mouseover text, set style, and interpolate from previous data values
-     u
+      var div = d3.select("#pieID").append("div")
+     .attr("class", "tooltip")
+     .style("opacity", 0);
+      // Build the pie chart, add fill, make arcs, add mouseover text, set style, and interpolate from previous data values
+      u
        .enter()
        .append('path')
        .attr("class","path"+num)
@@ -499,15 +478,27 @@ var initialPie =function(dada){
        })
        .attr('transform', 'translate(0, 0)')
        .on('mouseover', function (d, i) {
-            d3.select(this).transition()
-                 .duration('50')
-                 .attr('opacity', '.85');
-            div.transition()
-                 .duration(50)
-                 .style("opacity", 1);
-            div.html(d.data.key + ": " + d.value)
-                 .style("top", (d3.event.pageY)+"px")
-                 .style("left",(d3.event.pageX)+"px");
+          if(d.data.key=="empty"){
+              d3.select(this).transition()
+                   .duration('50')
+                   .attr('opacity', '.85');
+              div.transition()
+                   .duration(25)
+                   .style("opacity", 1);
+              div.html("N/A")
+                   .style("top", (d3.event.clientY)+"px")
+                   .style("left",(d3.event.clientX)+"px");
+            }else{
+              d3.select(this).transition()
+                   .duration('50')
+                   .attr('opacity', '.85');
+              div.transition()
+                   .duration(25)
+                   .style("opacity", 1);
+              div.html(d.data.key + ": " + d.value)
+                   .style("top", (d3.event.clientY)+"px")
+                   .style("left",(d3.event.clientX)+"px");
+            }
        })
        .on('mouseout', function (d, i) {
             d3.select(this).transition()
@@ -548,6 +539,11 @@ var initialPie =function(dada){
   }
 }
 
+//clear tooltip divs
+var clearTool = function(){
+  d3.selectAll(".tooltip").remove();
+}
+
 //update Chart if slider is changed
 var updateChart = function() {
     //getting new dataset based on slider value
@@ -558,6 +554,7 @@ var updateChart = function() {
 
     //checking current chart type and cleaning up the dataset for passing to appropraite updateBar1 or updateBar2 and updatePie functions
     if (chartType=="pie"){
+      clearTool();
       for (var i = 0; i < data.length; i++) {
           updatePie(data[i],i);
       }
@@ -644,7 +641,8 @@ var newGraph = function(){
 
   //cleaning up the dataset for passing to initialBar1 and initialBar2 and initialPie functions
   if(r && d && n ){
-    //setting Charttype
+    //setting Charttype and clearing tooltip
+    clearTool();
     chartType="pie";
     //rendering
     initialPie(data);
