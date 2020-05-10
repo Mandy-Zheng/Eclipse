@@ -27,14 +27,14 @@ function digits_count(n) {
 //function for creating and updating a single-bar bar graph
 var initialBar1 = function(data, l){
   // console.log(data);
+  // console.log(data.length);
 
   //margins
   var margin = {top:50, right:50, bottom:50, left:50};
   //the total width of the bar graph
-  var height = data.length*100-100;
+  var height = data.length*100;
   //the total height of the bar graph
-  var width = 1200-100;
-
+  var width = 1200;
 
   //sets the number of pixels for the y scale
   //adds padding
@@ -195,9 +195,9 @@ var initialBar2 = function(data, l){
   //margins
   var margin = {top:50, right:50, bottom:50, left:50};
   //the total width of the bar graph
-  var height = data.length*100-100;
+  var height = data.length*100;
   //the total height of the bar graph
-  var width = 1200-100;
+  var width = 1200;
 
 
   //sets the number of pixels for the y scale
@@ -576,7 +576,8 @@ var newGraph = function(){
   //getting new dataset based on slider value
   var data =  getData(slider.value);
   num = 0;
-
+  // console.log("here");
+  // console.log(data);
   //checking for which options are checked
   var d = document.getElementById("d").checked;
   var r = document.getElementById("r").checked;
