@@ -1,7 +1,10 @@
-var data1 = [{"country":"Canada", "cases":7, "deaths":10, "recoveries":9},
-  {"country":"China","cases":7,"deaths": 15,"recoveries":0},{"country":"France","cases":5,"deaths":20,"recoveries":4}];
-var data2 = [{"country":"Canada", "cases":0, "deaths":1, "recoveries":9},
-  {"country":"China","cases":12,"deaths": 18,"recoveries":29},{"country":"France","cases":5,"deaths":0,"recoveries":17}];
+var data1 = [{"country":"Canada", "Cases":7, "Deaths":10, "Recoveries":9},
+  {"country":"China","Cases":7,"Deaths": 15,"Recoveries":0},{"country":"France","Cases":5,"Deaths":20,"Recoveries":4}];
+var data2 = [{"country":"Canada", "Cases":0, "Deaths":1, "Recoveries":9},
+  {"country":"China","Cases":12,"Deaths": 18,"Recoveries":29},{"country":"France","Cases":5,"Deaths":0,"Recoveries":17}];
+var data3 = [{"country":"Canada", "Cases":0, "Deaths":1, "Recoveries":9},
+  {"country":"China","Cases":12,"Deaths": 18,"Recoveries":29},{"country":"France","Cases":5,"Deaths":0,"Recoveries":17}];
+  
 var updatePie;
 // set the dimensions and margins of the graph
 var initialPie =function(dada){
@@ -47,9 +50,9 @@ updatePie =function(data,num) {
    var u = svg.selectAll("path")
      .data(data_ready);
 
-     var div = d3.select("body").append("div")
-         .attr("class", "tooltip")
-         .style("opacity", 0);
+   var div = d3.select("#pieID").append("div")
+     .attr("class", "tooltip")
+     .style("opacity", 0);
 
    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
    // u
@@ -93,9 +96,9 @@ updatePie =function(data,num) {
           div.transition()
                .duration(50)
                .style("opacity", 1);
-          div.html(d.value)
-               .style("left", (d3.event.pageX + 10) + "px")
-               .style("top", (d3.event.pageY - 15) + "px");
+          div.html(d.data.key + ": " + d.value)
+               .style("top", (d3.event.pageY)+"px")
+               .style("left",(d3.event.pageX)+"px");
      })
      .on('mouseout', function (d, i) {
           d3.select(this).transition()
