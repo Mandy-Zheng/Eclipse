@@ -1,6 +1,3 @@
-// var data =  [{"country":"Canada","cases":7,"deaths":10},
-// {"country":"China","cases":7,"deaths": 15},{"country":"France","cases":5,"deaths":20}]
-
 var num = 0;
 var canadaN = [5, 10, 15, 20, 25, 30, 35, 40]
 var canadaD = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -388,100 +385,161 @@ var initialBar2 = function(data, l){
 
 }
 
-var initialPie = function(data){
-  for (var i = 0; i < data.length; i++) {
-  // set the dimensions and margins of the graph
-  var width = 450
-      height = 450
-      margin = 50
-
-  // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-  var radius = Math.min(width, height) / 2 - margin
-
-  // append the svg object to the div called 'my_dataviz'
-  var svg = d3.select("#pieID")
-    .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-    .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-  // set the color scale
-  var color = d3.scaleOrdinal()
-    .domain(data[i])
-    .range(d3.schemeDark2);
-
-  // A function that create / update the plot for a given variable:
-  //
-
-    // Compute the position of each group on the pie:
-    var pie = d3.pie()
-      .value(function(d) {return d.value; })
-      .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
-    var data_ready = pie(d3.entries(data[i]))
-
-    var label = d3.arc()
-              .outerRadius(radius+60)
-              .innerRadius(radius);
-
-    // map to data
-    var u = svg.selectAll("path")
-      .data(data_ready)
-
-    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-    u
-      .enter()
-      .append('path')
-      .merge(u)
-      .transition()
-      .duration(1000)
-      .attr('d', d3.arc()
-        .innerRadius(0)
-        .outerRadius(radius)
-      )
-      .attr('fill', function(d){return(color(d.data.key)) })
-      .attr("stroke", "white")
-      .style("stroke-width", "2px")
-      .style("opacity", 1)
-
-    svg.selectAll(".text")
-      .data(data_ready)
-      .enter()
-        .append("text")                                     //add a label to each slice
-        .attr("transform", function(d) {                //set the label's origin to the center of the arc
-              //we have to make sure to set these before calling arc.centroid
-          return "translate(" +label.centroid(d)+ ")";        //this gives us a pair of coordinates like [50, 50]
-        })
-        .attr("text-anchor", "middle")                          //center the text on it's origin
-        .text(function(d) {
-          if(!Number.isNaN(d.value)){
-    			  return d.data.key;
-          }
-        })
-
-    // remove the group that is not present anymore
-    u
-      .exit()
-      .remove()
+var updateChart = function() {
+    var data = getData(slider.value);
+    var subData=[];
+    if (chartType=="pie"){
+      for (var i = 0; i < data.length; i++) {
+          updatePie(data[i],i);
+      }
+    }else if(chartType=="bar2dr"){
+      for (var i = 0; i < data.length; i++) {
+       var dict={}
+       dict.country=data[i].location;
+       dict.option1=data[i].deaths;
+       dict.option2=data[i].recovered;
+       subData.push(dict);
+      }
+      updateBar2(subData);
+    }else if(chartType=="bar2rn"){
+      for (var i = 0; i < data.length; i++) {
+        var dict={}
+        dict.country=data[i].location;
+        dict.option1=data[i].recovered;
+        dict.option2=data[i].cases;
+        subData.push(dict);
+      }
+      updateBar2(subData);
+    }else if(chartType=="bar2dn"){
+      var dict={}
+      dict.country=data[i].location;
+      dict.option1=data[i].deaths;
+      dict.option2=data[i].cases;
+      subData.push(dict);
+    }else if (chartType=="bar1d") {
+      for (var i = 0; i < data.length; i++) {
+       chartType="bar1n";
+       var dict={}
+       dict.country=data[i].location;
+       dict.option1=data[i].deaths;
+       subData.push(dict);
+      }
+      updateBar1(subData);
+    }else if (chartType=="bar1n") {
+      for (var i = 0; i < data.length; i++) {
+       chartType="bar1n";
+       var dict={}
+       dict.country=data[i].location;
+       dict.option1=data[i].cases;
+       subData.push(dict);
+      }
+      updateBar1(subData);
+    }else if (chartType=="bar1r") {
+      for (var i = 0; i < data.length; i++) {
+       chartType="bar1n";
+       var dict={}
+       dict.country=data[i].location;
+       dict.option1=data[i].recovered;
+       subData.push(dict);
+      }
+      updateBar1(subData);
     }
-  }
+}
+
+var updatePie;
+// set the dimensions and margins of the graph
+var initialPie =function(dada){
+  for (var i = 0; i < dada.length; i++) {
+var width = 450
+    height = 450
+    margin = 40
+
+// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+var radius = Math.min(width, height) / 2 - margin
+
+var local=d3.local();
+// append the svg object to the div called 'my_dataviz'
+var svg = d3.select("#pieID")
+  .append("svg")
+    .attr("id","pie"+i)
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("id","pie"+i)
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+// create 2 data_set
+var arc = d3.arc()
+  .innerRadius(0)
+  .outerRadius(radius)
+
+// set the color scale
+var color = d3.scaleOrdinal()
+  .domain(["recoveries","deaths","cases"])
+  .range(d3.schemeDark2);
+
+// A function that create / updatePie the plot for a given variable:
+updatePie =function(data,num) {
+  var pie = d3.pie()
+     .value(function(d) {
+       return d.value;
+     })
+     .sort(function(a, b) {
+       return d3.ascending(a.key, b.key);
+     }) // This make sure that group order remains the same in the pie chart
+   var data_ready = pie( d3.entries(data));
+   var svg = d3.select("g#pie"+num);
+   var u = svg.selectAll("path")
+     .data(data_ready);
+
+   // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+   u
+     .enter()
+     .append('path')
+     .attr("class","path"+num)
+     .each(function(d) {
+       local.set(this, d);
+     })
+     .merge(u)
+     .transition()
+     .duration(1000)
+     .attrTween('d', function(d) {
+       var i = d3.interpolate(local.get(this), d);
+       local.set(this, i(0));
+       return function(t) {
+         return arc(i(t));
+       };
+     })
+     .attr('fill', function(d) {
+       return (color(d.data.key))
+     })
+     .attr("stroke", "white")
+     .style("stroke-width", "2px")
+     .style("opacity", 1)
+
+   // remove the group that is not present anymore
+   u
+     .exit()
+     .remove()
+
+ }
+
+  updatePie(dada[i],i);
+}
+// Initialize the plot with the first dataset
+}
+
 var clearChart = function(){
   d3.selectAll("svg").remove();
 }
 
-const slider = document.getElementById('dateSlider');
-//slider.addEventListener('input', update);
-
-slider.value = 1;
-
 var newGraph = function(){
-  // var data =  getData(slider.value);
-  // console.log(data);
+  console.log(slider.value);
+  var data =  getData(slider.value);
   num = 0;
-  var data =  [{"location":"Canada", "cases":canadaN[num], "deaths":canadaD[num], "recovered":canadaR[num]},
+  /*var data =  [{"location":"Canada", "cases":canadaN[num], "deaths":canadaD[num], "recovered":canadaR[num]},
 {"location":"China","cases":7,"deaths": 15, "recovered": 25},{"location":"France","cases":5,"deaths":20, "recovered": 8}]
+  console.log(data);*/
   console.log(data);
-
   var d = document.getElementById("d").checked;
   var r = document.getElementById("r").checked;
   var n =document.getElementById("n").checked;
@@ -502,16 +560,14 @@ var newGraph = function(){
      subData.push(dict);
      options = ["Deaths", "Recoveries"];
     }
-    console.log("===========");
-    console.log(subData);
     initialBar2(subData, options);
   }else if( r && n){
-    chartType="bar2nr";
+    chartType="bar2rn";
     for (var i = 0; i < data.length; i++) {
      var dict={}
      dict.country=data[i].location;
-     dict.option1=data[i].recovered;
-     dict.option2=data[i].cases;
+     dict.option1=data[i].cases;
+     dict.option2=data[i].recovered;
      subData.push(dict);
      options = ["Recoveries", "New Cases"];
     }
@@ -567,134 +623,9 @@ var newGraph = function(){
   }
 }
 
-function updateBar(){
-  num++;
-  // console.log(num);
-  var data = [{"location":"Canada", "cases":canadaN[num], "deaths":canadaD[num], "recovered":canadaR[num]},
-  {"location":"China","cases":7,"deaths": 15, "recovered": 25},{"location":"France","cases":5,"deaths":20, "recovered": 8}]
-  // console.log(data);
-  var d = document.getElementById("d").checked;
-  var r = document.getElementById("r").checked;
-  var n =document.getElementById("n").checked;
-  var subData=[]
-  if( d && r){
-    for (var i = 0; i < data.length; i++) {
-     var dict={}
-     dict.country=data[i].location;
-     dict.option1=data[i].deaths;
-     dict.option2=data[i].recovered;
-     subData.push(dict)
-    }
-    updateBar2(subData);
-  }else if( r && n){
-    for (var i = 0; i < data.length; i++) {
-     var dict={}
-     dict.country=data[i].location;
-     dict.option1=data[i].recovered;
-     dict.option2=data[i].cases;
-     subData.push(dict);
-    }
-    updateBar2(subData);
-  }else if( d && n){
-    for (var i = 0; i < data.length; i++) {
-     var dict={}
-     dict.country=data[i].location;
-     dict.option1=data[i].deaths;
-     dict.option2=data[i].cases;
-     subData.push(dict);
-    }
-    updateBar2(subData);
-  }else if( r || d || n){
-    if(r){
-      for (var i = 0; i < data.length; i++) {
-       var dict={}
-       dict.country=data[i].location;
-       dict.option1=data[i].recovered;
-       subData.push(dict);
-      }
-    }else if(d){
-      for (var i = 0; i < data.length; i++) {
-       var dict={}
-       dict.country=data[i].location;
-       dict.option1=data[i].deaths;
-       subData.push(dict);
-      }
-    }else{
-      for (var i = 0; i < data.length; i++) {
-       var dict={}
-       dict.country=data[i].location;
-       dict.option1=data[i].cases;
-       subData.push(dict);
-      }
-    }
-    // console.log(subData);
-    updateBar1(subData);
-  }
-  // console.log(subData);
+var slider = document.getElementById('dateSlider');
 
-}
-
-// initialBar2(data);
-
-//displaying date
-/*
-var update = function() {
-    var data = getData(slider.value);
-    var subData=[];
-    if (chartType=="pie"){
-      updatePie(data);
-    }else if(chartType=="bar2dr"){
-      for (var i = 0; i < data.length; i++) {
-       var dict={}
-       dict.country=data[i].country;
-       dict.option1=data[i].deaths;
-       dict.option2=data[i].recoveries;
-       subData.push(dict);
-      }
-      updateBar2(subData);
-    }else if(chartType=="bar2nr"){
-      var dict={}
-      dict.country=data[i].country;
-      dict.option1=data[i].cases;
-      dict.option2=data[i].recoveries;
-      subData.push(dict);
-     }
-     updateBar2(subData);
-    }else if(chartType=="bar2dn"){
-      var dict={}
-      dict.country=data[i].country;
-      dict.option1=data[i].deaths;
-      dict.option2=data[i].cases;
-      subData.push(dict);
-    }else if (chartType=="bar1d") {
-      for (var i = 0; i < data.length; i++) {
-       chartType="bar1n";
-       var dict={}
-       dict.country=data[i].country;
-       dict.option1=data[i].deaths;
-       subData.push(dict);
-      }
-      updateBar1(subData);
-    }else if (chartType=="bar1n") {
-      for (var i = 0; i < data.length; i++) {
-       chartType="bar1n";
-       var dict={}
-       dict.country=data[i].country;
-       dict.option1=data[i].cases;
-       subData.push(dict);
-      }
-      updateBar1(subData);
-    }else if (chartType=="bar1r") {
-      for (var i = 0; i < data.length; i++) {
-       chartType="bar1n";
-       var dict={}
-       dict.country=data[i].country;
-       dict.option1=data[i].recoveries;
-       subData.push(dict);
-      }
-      updateBar1(subData);
-    }
-}*/
+slider.value = 1;
 
 
 
