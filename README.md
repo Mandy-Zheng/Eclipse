@@ -28,3 +28,8 @@ Our Covid-19 Tracker aims to give a comprehensive overview of the day-to-day cha
 when complete
 - `Ctrl+C`
 - `deactivate`
+
+#### Sources:
+        - https://www.d3-graph-gallery.com/graph/pie_changeData.html
+        - https://medium.com/@kj_schmidt/show-data-on-mouse-over-with-d3-js-3bf598ff8fc2
+        - https://bl.ocks.org/d3noob/8952219
