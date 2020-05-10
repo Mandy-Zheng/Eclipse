@@ -121,8 +121,6 @@ var initialBar1 = function(data, l){
 
 
   updateBar1 = function(updatedData){
-    // console.log("here");
-    // console.log(updatedData);
 
     yScale.domain(updatedData.map(function(d) { return d.country; }));
     yAxis = d3.axisLeft(yScale);
@@ -521,7 +519,6 @@ updatePie =function(data,num) {
        };
      })
      .attr('fill', function(d) {
-       console.log(color(d.data.key));
        return (color(d.data.key))
      })
      .attr("stroke", "white")
@@ -637,7 +634,6 @@ var newGraph = function(){
 }
 var next = function(){
   var slider = document.getElementById('dateSlider');
-  console.log(slider.value);
   var data =  getData(slider.value);
   var subData=[];
   if (chartType=="pie"){
@@ -697,11 +693,9 @@ var next = function(){
     updateBar1(subData);
   }
   if(slider.value==97){
-    console.log(slider.value);
-    slider.value=0
+    slider.value=1;
   }else{
-      slider.value = slider.value+1;
-      console.log(slider.value);
+      slider.value = parseInt(slider.value)+1;
   }
 }
 
