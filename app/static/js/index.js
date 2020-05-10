@@ -427,6 +427,7 @@ var local=d3.local();
 var svg = d3.select("#pieID")
   .append("div")
     .attr("id","location"+i)
+    .attr("class","locateDiv")
     var element = document.createElement("h2");
         element.appendChild(document.createTextNode(dada[i].location));
         document.getElementById('location'+i).appendChild(element);
@@ -463,10 +464,6 @@ updatePie =function(data,num) {
    var svg = d3.select("g#pie"+num);
    var u = svg.selectAll("path")
      .data(data_ready);
-
-     var div = d3.select("#pieID").append("div")
-     .attr("class", "tooltip")
-     .style("opacity", 0);
 
    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
    u
@@ -600,6 +597,7 @@ var updateChart = function() {
 
 var clearChart = function(){
   d3.selectAll("svg").remove();
+  d3.selectAll(".locateDiv").remove();
 }
 
 var newGraph = function(){
@@ -614,12 +612,14 @@ var newGraph = function(){
   var n =document.getElementById("n").checked;
   var subData=[]
   var options=[]
+//console.log("clearing");
   clearChart();
   chartType="";
 
   //cleaning up the dataset for passing to initialBar1 and initialBar2 and initialPie functions
   if(r && d && n ){
     chartType="pie";
+    clearChart();
     initialPie(data);
   }else if( d && r){
     //setting chart type
