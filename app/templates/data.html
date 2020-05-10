@@ -15,11 +15,11 @@
   }
   .yaxis {
     font-size: 13px;
-    font-family: times;
+    font-family: Didot;
   }
   .xaxis {
     font-size: 14px;
-    font-family: times;
+    font-family: Didot;
   }
   .bar {
       fill: #E5C3D1;
@@ -44,8 +44,26 @@
     font-size: 14px;
     font-weight: 400;
     text-anchor: middle;
-    font-family: times;
+    font-family: Didot;
   }
+  #update{
+    display: none;
+  }
+  #stop{
+    display: none;
+  }
+
+  div.tooltip {
+     position: absolute;
+     text-align: center;
+     padding: .5rem;
+     background: #FFFFFF;
+     color: #313639;
+     border: 1px solid #313639;
+     border-radius: 8px;
+     pointer-events: none;
+     font-size: 1.3rem;
+}
 </style>
 {% endblock %}
 
@@ -62,17 +80,17 @@
           <br>
           <h4 style = "color: #49416D;">Select which type of data you want to view:</h4>
           <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
-            <input type="checkbox" class="form-check-input filled-in countries" id='d'  style = "height: 15px; width: 18px;" onclick="newGraph()">
+            <input type="checkbox" class="form-check-input filled-in countries" id='d'  style = "height: 15px; width: 18px;" onclick="newGraph();">
             <label class="tick"></label>
             <label class="form-check-label">Deaths</label>
           </div>
           <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
-            <input type="checkbox" class="form-check-input filled-in countries" id='r'  style = "height: 15px; width: 18px;" onclick="newGraph()">
+            <input type="checkbox" class="form-check-input filled-in countries" id='r'  style = "height: 15px; width: 18px;" onclick="newGraph();">
             <label class="tick"></label>
             <label class="form-check-label">Recoveries</label>
           </div>
           <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled custom-control-inline">
-            <input type="checkbox" class="form-check-input filled-in countries" id='n'  style = "height: 15px; width: 18px;" onclick="newGraph()">
+            <input type="checkbox" class="form-check-input filled-in countries" id='n'  style = "height: 15px; width: 18px;" onclick="newGraph();">
             <label class="tick"></label>
             <label class="form-check-label">New Cases</label>
           </div>
@@ -80,24 +98,16 @@
           <h4 style = "color: #49416D;">Select which day you want to view the data for:</h4>
           <div class="d-flex justify-content-center my-4">
             <form class="range-field w-75">
-              <input type="range" min="1" max="100" class="slider" id="dateSlider">
+              <input type="range" min="1" max="97" class="slider" id="dateSlider" oninput="updateChart();">
             </form>
             <span class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span>
           </div>
           <p id="dateSelected">January 22, 2020</p>
         </div>
       </div>
+      <button type = "submit" class = "btn btn-outline-info" value = "sumbit" id = "update" onclick = "run();"> Transition </button>
+      <button class = "btn btn-outline-info" value = "sumbit" id = "stop" onclick = "stop();"> Stop </button>
       <br>
-      {% for state in states %}
-      <div class="row" style = "margin-left: 5px; margin-right: 5px;">
-          <h2>{{state}}</h2> &nbsp;
-      </div>
-      {% endfor %}
-      {% for country in countries %}
-      <div class="row" style = "margin-left: 5px; margin-right: 5px;">
-          <h2>{{country}}</h2> &nbsp;
-      </div>
-      {% endfor %}
     </center>
       <div id="chartID"></div>
       <div id="pieID"></div>
@@ -106,6 +116,8 @@
 
 {% block scripts %}
 <script type="text/javascript"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 <script src="/static/js/retrieve_data.js"></script>
 <script src="{{ url_for('static', filename='js/index.js')}}"></script>
