@@ -269,3 +269,6 @@ junheeL -- 2020-05-10 08:24
 
 junheeL -- 2020-05-10 08:45
       -fixed a bug that caused state data not to show up
+
+junheeL -- 2020-05-10 14:25
+      -states' names are now not abbreviated

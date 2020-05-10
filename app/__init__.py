@@ -107,7 +107,6 @@ def displayData():
 @app.route('/data', methods=['POST'])
 def getData():
     cList, sList = decode(request.form['q'])
-    sList = [abbrev[state] for state in sList]
     day = date.fromisoformat('2020-01-21') + timedelta(days=int(request.form['date']))
     c = [format(row) for row in countries if row[0] == day and row[1] in cList]
     for country in ['Australia', 'Canada', 'China', 'Denmark', 'France', 'Netherlands', 'United Kingdom']:
@@ -120,7 +119,7 @@ def getData():
                 new['recovered'] += int(entry['recovered'])
                 new['deaths'] += int(entry['deaths'])
             c.append(new)
-    s = [format(row, True) for row in states if row[0] == day and row[1] in sList]
+    s = [format(row, True) for row in states if row[0] == day and full(row[1]) in sList]
     for state in sList:
         if state not in [entry['location'] for entry in s]:
             s.append({'location': state, 'cases': 0, 'recovered': 0, 'deaths': 0})
@@ -131,7 +130,7 @@ def format(data, state=False):
     print(data)
     if state:
         return {
-            'location': data[1],
+            'location': full(data[1]),
             'cases': data[2] if data[2] != '' else 0,
             'recovered': data[11] if data[11] != '' else 0,
             'deaths': data[14] if data[14] != '' else 0
@@ -143,6 +142,9 @@ def format(data, state=False):
             'recovered': data[6] if data[6] != '' else 0, 
             'deaths': data[7] if data[7] != '' else 0
             }
+
+def full(short):
+    return [name for name in abbrev.keys() if abbrev[name] == short][0]
 
 if __name__ == "__main__":
     app.debug = True
