@@ -52,6 +52,18 @@
   #stop{
     display: none;
   }
+
+  div.tooltip {
+     position: absolute;
+     text-align: center;
+     padding: .5rem;
+     background: #FFFFFF;
+     color: #313639;
+     border: 1px solid #313639;
+     border-radius: 8px;
+     pointer-events: none;
+     font-size: 1.3rem;
+}
 </style>
 {% endblock %}
 
@@ -104,6 +116,8 @@
 
 {% block scripts %}
 <script type="text/javascript"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 <script src="/static/js/retrieve_data.js"></script>
 <script src="{{ url_for('static', filename='js/index.js')}}"></script>

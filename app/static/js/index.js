@@ -1,4 +1,3 @@
-
 //empty vars used for nested function in initialBar1 and initialBar2
 var updateBar1;
 var updateBar2;
@@ -410,7 +409,9 @@ var initialBar2 = function(data, l){
   }
 
 }
+
 var updatePie;
+// set the dimensions and margins of the graph
 
 var initialPie =function(dada){
   for (var i = 0; i < dada.length; i++) {
@@ -463,11 +464,39 @@ updatePie =function(data,num) {
    var u = svg.selectAll("path")
      .data(data_ready);
 
+     var div = d3.select("#pieID").append("div")
+     .attr("class", "tooltip")
+     .style("opacity", 0);
+
    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
    u
      .enter()
      .append('path')
      .attr("class","path"+num)
+     .attr('d', arc)
+     .attr('fill', function (d, i) {
+          return color(d.data.key);
+     })
+     .attr('transform', 'translate(0, 0)')
+     .on('mouseover', function (d, i) {
+          d3.select(this).transition()
+               .duration('50')
+               .attr('opacity', '.85');
+          div.transition()
+               .duration(50)
+               .style("opacity", 1);
+          div.html(d.data.key + ": " + d.value)
+               .style("top", (d3.event.pageY)+"px")
+               .style("left",(d3.event.pageX)+"px");
+     })
+     .on('mouseout', function (d, i) {
+          d3.select(this).transition()
+               .duration('50')
+               .attr('opacity', '1');
+          div.transition()
+               .duration('50')
+               .style("opacity", 0);
+     })
      .each(function(d) {
        local.set(this, d);
      })
