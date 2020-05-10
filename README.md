@@ -29,6 +29,10 @@ when complete
 - `Ctrl+C`
 - `deactivate`
 
+#### Warning:
+- Some functionalities do not work on Safari Browsers
+      - Depending on the version of safari, the issues can range from minor styling mishaps to not rendering any of the graphs at all
+- The recommended browser is Chrome or Firefox
 #### Sources:
         - https://www.d3-graph-gallery.com/graph/pie_changeData.html
         - https://medium.com/@kj_schmidt/show-data-on-mouse-over-with-d3-js-3bf598ff8fc2

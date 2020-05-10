@@ -437,6 +437,10 @@ var initialPie =function(dada){
     .domain(["recovered","deaths","cases","empty"])
     .range(["#E7298A","#2E294E","#59C9A5","#D3D3D3"]);
 
+  var div = d3.select("#pieID").append("div")
+   .attr("class", "tooltip")
+   .style("opacity", 0);
+
   // A function that updates pieChart by taking in a dictionary for one countries data and the index of that dictionary with respect to main data list
   updatePie = function(data,num) {
 
@@ -457,16 +461,13 @@ var initialPie =function(dada){
     //put entries in pie
      var data_ready = pie( d3.entries(data));
 
-     //find the right g contianer to eid
+     //find the right g contianer to add
      var svg = d3.select("g#pie"+num);
 
      //select all the path in that g conainer and bind the data
      var u = svg.selectAll("path")
        .data(data_ready);
 
-      var div = d3.select("#pieID").append("div")
-     .attr("class", "tooltip")
-     .style("opacity", 0);
       // Build the pie chart, add fill, make arcs, add mouseover text, set style, and interpolate from previous data values
       u
        .enter()
@@ -486,7 +487,7 @@ var initialPie =function(dada){
                    .duration(25)
                    .style("opacity", 1);
               div.html("N/A")
-                   .style("top", (d3.event.clientY)+"px")
+                   .style("top", (d3.event.clientY)+300+"px")
                    .style("left",(d3.event.clientX)+"px");
             }else{
               d3.select(this).transition()
@@ -496,7 +497,7 @@ var initialPie =function(dada){
                    .duration(25)
                    .style("opacity", 1);
               div.html(d.data.key + ": " + d.value)
-                   .style("top", (d3.event.clientY)+"px")
+                   .style("top", (d3.event.clientY)+300+"px")
                    .style("left",(d3.event.clientX)+"px");
             }
        })
@@ -554,7 +555,7 @@ var updateChart = function() {
 
     //checking current chart type and cleaning up the dataset for passing to appropraite updateBar1 or updateBar2 and updatePie functions
     if (chartType=="pie"){
-      clearTool();
+      //clearTool();
       for (var i = 0; i < data.length; i++) {
           updatePie(data[i],i);
       }
@@ -642,7 +643,7 @@ var newGraph = function(){
   //cleaning up the dataset for passing to initialBar1 and initialBar2 and initialPie functions
   if(r && d && n ){
     //setting Charttype and clearing tooltip
-    clearTool();
+    //clearTool();
     chartType="pie";
     //rendering
     initialPie(data);
