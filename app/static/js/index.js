@@ -82,7 +82,7 @@ var initialBar1 = function(data, l){
   labeling.append("text")
       .attr("class","label")
       .attr("y", (function(d) { return yScale(d.country) + 5 + yScale.bandwidth()/2; }  ))
-      .attr("x", function(d) { return  xScale(d.option1) + 12; })
+      .attr("x", function(d) { return  xScale(d.option1) + 6; })
       .attr("dx", ".75em")
       .text(function(d) { return d.option1; });
 
@@ -165,7 +165,7 @@ var initialBar1 = function(data, l){
           return function( t ) {
             this.textContent = interpolator( t );
           };})
-        .attr("x", function() { testing3++; return xScale(updatedData[testing3].option1) + 12; })
+        .attr("x", function() { testing3++; return xScale(updatedData[testing3].option1) + 6; })
     testing2 = -1;
     testing3 = -1;
   }
@@ -251,7 +251,7 @@ var initialBar2 = function(data, l){
       .attr("class","label")
       .attr("class", "first")
       .attr("y", (function(d) { return yScale(d.country) + 5 + yScale.bandwidth() / 4 ; }  ))
-      .attr("x", function(d) { return  xScale(d.option1) + 12; })
+      .attr("x", function(d) { return  xScale(d.option1) + 6; })
       .attr("dx", ".75em")
       .text(function(d) { return d.option1; });
 
@@ -260,7 +260,7 @@ var initialBar2 = function(data, l){
       .attr("class", "label")
       .attr("class", "second")
       .attr("y", (function(d) { return yScale(d.country) + 5 + ((yScale.bandwidth() / 4) * 3) ; } ))
-      .attr("x", function(d) { return xScale(d.option2) + 12; })
+      .attr("x", function(d) { return xScale(d.option2) + 6; })
       .attr("dx", ".75em")
       .text(function(d) {return  d.option2;})
 
@@ -370,7 +370,7 @@ var initialBar2 = function(data, l){
           return function( t ) {
             this.textContent = interpolator( t );
           };})
-        .attr("x", function() { testing2++; return xScale(updatedData[testing2].option1) + 12; })
+        .attr("x", function() { testing2++; return xScale(updatedData[testing2].option1) + 6; })
         //.attr("x", (function(d) { return xScale(d.country) + xScale.bandwidth() / 2 ; }  ));
 
     //resets the bar number labels for option2 and transitions the previous numbers to the new data numbers
@@ -386,7 +386,7 @@ var initialBar2 = function(data, l){
           return function( t ) {
             this.textContent = interpolator( t );
           };})
-        .attr("x", function() { label2++; return xScale(updatedData[label2].option2) + 12; })
+        .attr("x", function() { label2++; return xScale(updatedData[label2].option2) + 6; })
   }
 
 }
@@ -436,7 +436,7 @@ var initialPie =function(dada){
   // set the color scale to each key
   var color = d3.scaleOrdinal()
     .domain(["recovered","deaths","cases","empty"])
-    .range(["#E7298A","#2E294E","#59C9A5","#D3D3D3"]);
+    .range(["#FFEE93","#A7E8BD","#FEC3A6","#D3D3D3"]);
 
   var div = d3.select("#pieID").append("div")
    .attr("class", "tooltip")

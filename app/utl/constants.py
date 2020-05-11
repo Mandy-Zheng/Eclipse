@@ -12,7 +12,7 @@ abbrev = {
     'Delaware': 'DE',
     'District of Columbia': 'DC',
     'Florida': 'FL',
-    'Georgia': 'GA',
+    'Georgia (State)': 'GA',
     'Guam': 'GU',
     'Hawaii': 'HI',
     'Idaho': 'ID',
