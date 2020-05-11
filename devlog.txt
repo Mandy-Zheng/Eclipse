@@ -308,3 +308,8 @@ amandaZ -- 2020-05-10 16:39
 amandaZ -- 2020-05-10 17:30
       -updated README about Safari issue
       -fix pop up stuff
+
+tiffanyC -- 2020-05-10 20:41
+      -fixed bugs with bar charts
+      -fixed any styling issues with bar charts
+      -fixed problems with checkboxes and allStates/allCountries

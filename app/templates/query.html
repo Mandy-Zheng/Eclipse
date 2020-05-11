@@ -155,11 +155,11 @@ input[type="checkbox"]:checked + label.tick:after {
   for (var i=0; i<states.length; i++) {
     temp = states[i];
     temp.addEventListener('change', function(){
-      console.log(temp.value);
-      console.log(temp.checked);
+      // console.log(temp.value);
+      // console.log(temp.checked);
       if(temp.value == "on" && temp.checked == false){
         count++;
-        console.log(count);
+        // console.log(count);
         if(count == 56){
           allStates.checked = true;
           allStates.value = "on";
@@ -169,7 +169,7 @@ input[type="checkbox"]:checked + label.tick:after {
         }
       }else if (temp.value == "off" && temp.checked == true){
         count--;
-        console.log(count);
+        // console.log(count);
         if(count == 56){
           allStates.checked = true;
           allStates.value = "on";
@@ -179,7 +179,7 @@ input[type="checkbox"]:checked + label.tick:after {
         }
       }else if(temp.value == "on" && temp.checked == true){
         count--;
-        console.log(count);
+        // console.log(count);
         if(count == 56){
           allStates.checked = true;
           allStates.value = "on";
@@ -242,7 +242,16 @@ input[type="checkbox"]:checked + label.tick:after {
   for (var i=0; i<countries.length; i++) {
     secondTemp = countries[i];
     secondTemp.addEventListener('change', function(){
-      if(secondTemp.value == "on"){
+      if(secondTemp.value == "on" && secondTemp.checked == false){
+        secondCount++;
+        if(count == 185){
+          allCountries.checked = true;
+          allCountries.value = "on";
+        }else{
+          allCountries.checked = false;
+          allCountries.value = "off";
+        }
+      }else if(secondTemp.value == "on" && secondTemp.checked == true){
         secondCount--;
         if(secondCount == 185){
           allCountries.checked = true;
@@ -251,9 +260,19 @@ input[type="checkbox"]:checked + label.tick:after {
           allCountries.checked = false;
           allCountries.value = "off";
         }
-      }else if (secondTemp.value == "off"){
+      }else if (secondTemp.value == "off" && secondTemp.checked == false){
         secondCount++;
         if(secondCount == 185){
+          allCountries.checked = true;
+          allCountries.value = "on";
+        }else{
+          allCountries.checked = false;
+          allCountries.value = "off";
+        }
+      }else if (secondTemp.value == "off" && secondTemp.checked == true){
+        secondCount--;
+        // console.log(count);
+        if(secondCount == 56){
           allCountries.checked = true;
           allCountries.value = "on";
         }else{
