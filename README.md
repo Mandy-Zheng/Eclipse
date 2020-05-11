@@ -23,7 +23,7 @@ Our Covid-19 Tracker aims to give a comprehensive overview of the day-to-day cha
 - `cd Eclipse/`
 - `pip3 install -r requirements.txt`
 - `cd app/`
-- `python3 app.py`
+- `python3 __init__.py`
 
 when complete
 - `Ctrl+C`
