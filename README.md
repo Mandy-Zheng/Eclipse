@@ -12,7 +12,7 @@ P04: Let the Data Speak
 
 2020-04-24
 
-## Video Demo Here:
+## Video Demo Here: https://www.youtube.com/watch?v=YAdp5VkCJxs
 
 ### Description:
 Our Covid-19 Tracker aims to give a comprehensive overview of the day-to-day changes of the spread of the coronavirus. Our focus is on a global scale, as well as a closer look on the United States. Starting from January to April 2020, the tracker can report visually the number of total cases, recoveries, and deaths per day on multiple graphs. The tracker also has an interactive, exploratory interface for users. They have the option of choosing which data they want to be included (they have the three choices listed before) and which countries or states they want to compare. The data for each state and/or country is represented with either a bar chart or a pie chart depending on the options chosen. Hovering over some charts will have a pop-up that shows information and numerical data. Sliders will be available for users to choose the dates, but a continuous, automatic animation of the daily changes can also be presented.
